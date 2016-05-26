@@ -1,3 +1,6 @@
+require 'awesome_print'
+AwesomePrint.irb!
+
 def safely_require(lib, &block)
   begin
     require lib.to_s
