@@ -30,6 +30,7 @@ au BufWritePost .vimrc so $MYVIMRC
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=/usr/local/opt/fzf
 call vundle#begin()
 
 " let Vundle manage Vundle, required
@@ -51,18 +52,21 @@ Plugin 'KurtPreston/vim-autoformat-rails'
 Plugin 'ervandew/supertab'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'tpope/vim-rbenv'
-Plugin 'junegunn/fzf'
 Plugin 'benmills/vimux'
 Plugin 'jgdavey/vim-turbux'
 Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'yegappan/mru'
+Plugin 'ctrlpvim/ctrlp.vim'
 " All of your Plugins must be added before the following line
 call vundle#end()
+
 
 "Stop hightling search words
 nnoremap <leader><space> :nohlsearch<CR>
 
 "key word search
 nnoremap <leader>a :Ag!
+noremap <leader>z :Ag! <C-r>=expand('<cword>')<CR><CR>
 
 "open related file in vertical split
 nnoremap <leader>b :AV<CR>
@@ -98,8 +102,6 @@ map <leader>f :FZF<CR>
 "moving lines
 nnoremap J :m .+1<CR>==
 nnoremap K :m .-2<CR>==
-inoremap J <Esc>:m .+1<CR>==gi
-inoremap K <Esc>:m .-2<CR>==gi
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
@@ -122,4 +124,3 @@ map <leader>q :q<CR>
 
 "source vim file
 nnoremap <leader>sv :source $MYVIMRC<cr>
-
