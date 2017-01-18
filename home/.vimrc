@@ -57,9 +57,15 @@ Plugin 'jgdavey/vim-turbux'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'yegappan/mru'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'fatih/vim-go'
+Plugin 'MattesGroeger/vim-bookmarks'
+Plugin 'janko-m/vim-test'
+Plugin 'vimwiki/vimwiki'
+Plugin 'alvan/vim-closetag'
 " All of your Plugins must be added before the following line
 call vundle#end()
 
+let test#strategy = "vimux"
 
 "Stop hightling search words
 nnoremap <leader><space> :nohlsearch<CR>
@@ -67,7 +73,7 @@ nnoremap <leader><space> :nohlsearch<CR>
 "key word search
 nnoremap <leader>a :Ag!
 noremap <leader>z :Ag! <C-r>=expand('<cword>')<CR><CR>
-
+nnoremap <leader>ar  :Ag! G ".*.rb"'
 "open related file in vertical split
 nnoremap <leader>b :AV<CR>
 
@@ -104,6 +110,16 @@ nnoremap J :m .+1<CR>==
 nnoremap K :m .-2<CR>==
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+
+"ctags
+nnoremap <leader>. <C-]>
+
+"gitgutter
+nmap <leader>] <Plug>GitGutterNextHunk
+nmap <leader>[ <Plug>GitGutterPrevHunk
+
+nmap <Leader>h <Plug>GitGutterStageHunk
+nmap <Leader>hh <Plug>GitGutterUndoHunk
 
 "colourscheme
 set t_Co=256
