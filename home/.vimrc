@@ -40,7 +40,6 @@ Plugin 'tpope/vim-rails'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-Plugin 'rking/ag.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdcommenter'
@@ -58,10 +57,10 @@ Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'yegappan/mru'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'fatih/vim-go'
-Plugin 'MattesGroeger/vim-bookmarks'
-Plugin 'janko-m/vim-test'
-Plugin 'vimwiki/vimwiki'
 Plugin 'alvan/vim-closetag'
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
+"Plugin 'jremmen/vim-ripgrep'
 " All of your Plugins must be added before the following line
 call vundle#end()
 
@@ -71,8 +70,8 @@ let test#strategy = "vimux"
 nnoremap <leader><space> :nohlsearch<CR>
 
 "key word search
-nnoremap <leader>a :Ag!
-noremap <leader>z :Ag! <C-r>=expand('<cword>')<CR><CR>
+nnoremap <leader>a :Find
+noremap <leader>z :grep <cword> *<CR>
 nnoremap <leader>ar  :Ag! G ".*.rb"'
 "open related file in vertical split
 nnoremap <leader>b :AV<CR>
@@ -82,28 +81,15 @@ autocmd BufWritePre * StripWhitespace
 
 "testing
 let g:turbux_command_prefix = 'bundle exec'
-" Run the current file with rspec
 
-" Prompt for a command to run
-map <Leader>vp :VimuxPromptCommand<CR>
-
-" Run last command executed by VimuxRunCommand
-map <Leader>vl :VimuxRunLastCommand<CR>
-
-" Inspect runner pane
-map <Leader>vi :VimuxInspectRunner<CR>
-
-" Close vim tmux runner opened by VimuxRunCommand
-map <Leader>vq :VimuxCloseRunner<CR>
-
-" Interrupt any command running in the runner pane
-map <Leader>vx :VimuxInterruptRunner<CR>
-
-" Zoom the runner pane (use <bind-key> z to restore runner pane)
-map <Leader>vz :call VimuxZoomRunner()<CR>
+" Turbux
+let g:no_turbux_mappings = 1
+" hack to fix broken 'run focused test' since
+" https://github.com/jgdavey/vim-turbux/pull/36
+let g:turbux_test_type = ''
 
 "start fuzzy finder
-map <leader>f :FZF<CR>
+map <leader>f :Files<CR>
 
 "moving lines
 nnoremap J :m .+1<CR>==
@@ -137,6 +123,30 @@ map <leader>n :NERDTreeToggle<CR>
 "save and quit
 map <leader>s :w<CR>
 map <leader>q :q<CR>
+
+"fzf and rg config
+" --column: Show column number
+" --line-number: Show line number
+" --no-heading: Do not show file headings in results
+" --fixed-strings: Search term as a literal string
+" --ignore-case: Case insensitive search
+" --no-ignore: Do not respect .gitignore, etc...
+" --hidden: Search hidden files and folders
+" --follow: Follow symlinks
+" --glob: Additional conditions for search (in this case ignore everything in
+"  the .git/ folder)
+" --color: Search color options
+command! -bang -nargs=* Find call fzf#vim#grep('rg --line-number --fixed-strings --ignore-case --color "always" '.shellescape(<q-args>), 0, <bang>0)
+
+
+imap <c-x><c-l> <plug>(fzf-complete-line)
+
+" Better command history with q:
+command! CmdHist call fzf#vim#command_history()
+nnoremap <leader>fh :CmdHist<CR>
+
+" Better search history
+nnoremap <leader>ff :History<CR>
 
 "source vim file
 nnoremap <leader>sv :source $MYVIMRC<cr>
