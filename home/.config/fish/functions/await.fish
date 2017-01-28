@@ -1,0 +1,1 @@
+/Users/josh/.config/fisherman/await/functions/await.fish

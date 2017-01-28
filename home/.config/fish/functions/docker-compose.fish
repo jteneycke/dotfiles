@@ -1,0 +1,1 @@
+/Users/josh/.config/fisherman/docker-fish-completion/docker-compose.fish
