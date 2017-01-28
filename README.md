@@ -1,4 +1,4 @@
-## Emma's Dotfiles
+## Josh's Dotfiles
 
 ## Install
 
