@@ -104,6 +104,7 @@ Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdtree'
 "Plug 'jistr/vim-nerdtree-tabs'
 "let g:nerdtree_tabs_open_on_console_startup = 1
+let NERDTreeShowHidden=1
 Plug 'L9'
 "Plug 'FuzzyFinder'
 "Plug 'Valloric/YouCompleteMe'
