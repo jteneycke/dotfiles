@@ -15,8 +15,7 @@ set hlsearch
 set expandtab
 set synmaxcol=550
 "set guifont=Ubuntu\ Mono\ 24
-set clipboard=unnamedplus
-"set clipboard=unnamed
+set clipboard=unnamed
 
 if &term =~ '256color'
   " Disable Background Color Erase (BCE) so that color schemes
