@@ -1,5 +1,6 @@
-source $HOME/.bashrc
-source $HOME/.tmux/tmux-completion.bash
+[ -f ~/.bashrc ] && source ~/.bashrc
+[ -f ~/.tmux/tmux-completion.bash ] && source ~/.tmux/tmux-completion.bash
+
 PATH=$PATH:/home/deploy/.cargo/bin
 
 set -o vi
