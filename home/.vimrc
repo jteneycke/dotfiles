@@ -44,20 +44,51 @@ set backup
 set noswapfile
 
 
-" Make vim defaults more bearable
+" Navigational Bindings #bindings
 " ----------------------------------------
 
-" automatically resize window
-au VimResized * exe "normal! \<c-w>="
+" Go directly to column below instead of wrapping to next line
+nnoremap j gj
+nnoremap k gk
 
-" Only show cursorline in the current window and in normal mode.
-augroup cline
-    au!
-    au WinLeave * set nocursorline
-    au WinEnter * set cursorline
-    au InsertEnter * set nocursorline
-    au InsertLeave * set cursorline
-augroup END
+" Fast up / down across blank lines
+nnoremap <S-j> }
+nnoremap <S-k> {
+
+" Easy splitted window navigation
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+
+" Resize pane
+nnoremap <silent> + <C-w>>
+nnoremap <silent> _ <C-w><
+
+" NerdTree
+map <Leader>f :NERDTreeToggle<CR>
+nnoremap <Leader>d :NERDTreeFind<CR>
+"map <Leader>f <plug>NERDTreeTabsToggle<CR>
+
+" Move tab left and right (for sorting and rearranging)
+map <Leader>h :tabm -1<CR>
+map <Leader>l :tabm +1<CR>
+
+" Go forwards and backwards a tab
+map <Leader>j :tabp<CR>
+map <Leader>k :tabn<CR>
+
+map <Leader>n :tabnew<CR>
+
+" Fast quit / save
+map <Leader>q :q<CR>
+map <Leader>s :w<CR>
+
+" Paste last line of pry history to buffer
+nmap <Leader>ph :<c-u>let pc = (v:count1 ? v:count1 : 1)<cr>:read !tail -<c-r>=pc<cr> ~/.pry_history<cr>:.-<c-r>=pc-1<cr>:norm <c-r>=pc<cr>==<cr>
+
+" Who's to blame!
+map <Leader>g :Gblame<CR>
 
 
 " Quick reloading for binding and function development
@@ -211,46 +242,6 @@ nnoremap <leader>t :CtrlPTag<cr>
 "  \ 'ctrl-v': 'vsplit' }
 
 
-" Navigational Bindings #bindings
-" ----------------------------------------
-
-" Go directly to column below instead of wrapping to next line
-nnoremap j gj
-nnoremap k gk
-
-" Fast up / down across blank lines
-nnoremap <S-j> }
-nnoremap <S-k> {
-
-" Easy splitted window navigation
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-
-" Resize pane
-nnoremap <silent> + <C-w>>
-nnoremap <silent> _ <C-w><
-
-" NerdTree
-map <Leader>f :NERDTreeToggle<CR>
-nnoremap <Leader>d :NERDTreeFind<CR>
-"map <Leader>f <plug>NERDTreeTabsToggle<CR>
-
-" Move tab left and right (for sorting and rearranging)
-map <Leader>h :tabm -1<CR>
-map <Leader>l :tabm +1<CR>
-
-" Go forwards and backwards a tab
-map <Leader>j :tabp<CR>
-map <Leader>k :tabn<CR>
-
-map <Leader>n :tabnew<CR>
-
-map <Leader>q :q<CR>
-map <Leader>s :w<CR>
-
-
 " Writing mode
 " ----------------------------------------
 "Plug 'junegunn/goyo.vim'
@@ -301,20 +292,25 @@ map <S-p> :r ~/.vimbuf<CR>
 ":execute 'new | 0read ! testy' expand('%')
 
 
-" Utility functions
-" ----------------------------------------
-
-" Paste last line of pry history to buffer
-nmap <Leader>ph :<c-u>let pc = (v:count1 ? v:count1 : 1)<cr>:read !tail -<c-r>=pc<cr> ~/.pry_history<cr>:.-<c-r>=pc-1<cr>:norm <c-r>=pc<cr>==<cr>
-
-" Who's to blame!
-map <Leader>g :Gblame<CR>
-
-
-
 " End of plugin declarations and loading
 " ----------------------------------------
 call plug#end()
+
+
+" Make vim defaults more bearable
+" ----------------------------------------
+
+" automatically resize window
+au VimResized * exe "normal! \<c-w>="
+
+" Only show cursorline in the current window and in normal mode.
+augroup cline
+    au!
+    au WinLeave * set nocursorline
+    au WinEnter * set cursorline
+    au InsertEnter * set nocursorline
+    au InsertLeave * set cursorline
+augroup END
 
 
 " File associations for syntax highlighting
