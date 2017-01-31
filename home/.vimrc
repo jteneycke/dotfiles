@@ -114,6 +114,7 @@ Plug 'tpope/vim-fireplace'
 Plug 'tpope/vim-classpath'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-rails'
+Plug 'tpope/dispatch'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
@@ -161,13 +162,14 @@ Plug 'airblade/vim-gitgutter'
 Plug 'albfan/ag.vim'
 
 " Themes
+Plug 'morhetz/gruvbox'
 Plug 'joshdick/onedark.vim'
 Plug 'tomasr/molokai'
-"let g:rehash256 = 1
-colorscheme molokai
-
 "let g:onedark_termcolors=16
 "colorscheme onedark
+"colorscheme gruvbox
+let g:rehash256 = 1
+colorscheme molokai
 
 Plug 'ElmCast/elm-vim'
 let g:elm_format_autosave = 1
@@ -178,8 +180,10 @@ set ts=2 sw=2 et
 let g:indent_guides_start_level = 2
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=black    ctermbg=235
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=darkgrey ctermbg=236
+"let g:rehash256 = 1
+
+"autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=grey    ctermbg=235
+"autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=darkgrey ctermbg=236
 Plug 'michaeljsmith/vim-indent-object'
 let g:indentobject_meaningful_indentation = ["haml", "sass", "python", "yaml", "markdown"]
 
