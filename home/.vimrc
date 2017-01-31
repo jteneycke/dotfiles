@@ -144,23 +144,36 @@ let g:elm_format_autosave = 1
 " ----------------------------------------
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-rails'
-Plug 'tpope/dispatch'
-Plug 'janko-m/vim-test'
+"Plug 'tpope/dispatch'
+"Plug 'skalnik/vim-vroom'
+"let g:vroom_use_zeus = 1
 
+" run bash command on current_file name
+"nmap <silent> <leader>t :!echo %:p
+
+" close, but needs to do it in a seperate pane
+Plug 'janko-m/vim-test'
+let test#strategy = "vtr"
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
 
 " Tmux integrations
 " ----------------------------------------
 Plug 'keith/tmux.vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'benmills/vimux'
-map <Leader>rb :call VimuxRunCommand("clear; rspec " . bufname("%"))<CR>
-map <Leader>vp :VimuxPromptCommand<CR>
-map <Leader>vl :VimuxRunLastCommand<CR>
-map <Leader>vi :VimuxInspectRunner<CR>
-map <Leader>vq :VimuxCloseRunner<CR>
-map <Leader>vs :VimuxInterruptRunner<CR>
-map <Leader>vc :VimuxClearRunnerHistory<CR>
-map <Leader>vz :VimuxZoomRunner<CR>
+Plug 'christoomey/vim-tmux-runner'
+"Plug 'benmills/vimux'
+"map <Leader>rb :call VimuxRunCommand("clear; rspec " . bufname("%"))<CR>
+"map <Leader>vp :VimuxPromptCommand<CR>
+"map <Leader>vl :VimuxRunLastCommand<CR>
+"map <Leader>vi :VimuxInspectRunner<CR>
+"map <Leader>vq :VimuxCloseRunner<CR>
+"map <Leader>vs :VimuxInterruptRunner<CR>
+"map <Leader>vc :VimuxClearRunnerHistory<CR>
+"map <Leader>vz :VimuxZoomRunner<CR>
 
 
 " Simple file browser tree
@@ -233,7 +246,7 @@ let g:ctrlp_open_new_file = 't' " Open newly created files in a new tab
 let g:ctrlp_open_multiple_files = 't' " Open multiple files in new tabs
 let g:ctrlp_show_hidden = 1 " Index hidden files
 set wildignore+=*/public/uploads/*
-nnoremap <leader>t :CtrlPTag<cr>
+"nnoremap <leader>t :CtrlPTag<cr>
 
 
 " FZF - TODO: Use this instead of CtrlP
