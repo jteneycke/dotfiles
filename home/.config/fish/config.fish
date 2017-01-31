@@ -43,6 +43,8 @@ function git-rm
   git rm -r --cached (echo $argv);
 end
 
+alias gc="git commit"
+
 function gcm
   git commit -m (echo $argv);
 end
