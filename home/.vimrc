@@ -2,7 +2,10 @@ set nocompatible
 syntax on
 filetype off
 
+" Take me to your leader! What's that? He's the biggest key on the board?
 let mapleader=" "
+
+" No one wants to type shift a billion times just to enter commands
 nnoremap ; :
 
 set shell=/bin/bash
@@ -12,6 +15,18 @@ set expandtab
 set synmaxcol=550
 set clipboard+=unnamed
 set paste
+
+
+" Store all those temp files the editor makes somewhere out of the way
+" ----------------------------------------
+set undodir=~/.vim/tmp/undo//     " undo files
+set undofile
+set undolevels=3000
+set undoreload=10000
+set backupdir=~/.vim/tmp/backup// " backups
+set directory=~/.vim/tmp/swap//   " swap files
+set backup
+set noswapfile
 
 
 " Play nice with tmux
@@ -32,19 +47,7 @@ endif
 set term=screen-256color
 
 
-" Store all those temp files the editor makes somewhere out of the way
-" ----------------------------------------
-set undodir=~/.vim/tmp/undo//     " undo files
-set undofile
-set undolevels=3000
-set undoreload=10000
-set backupdir=~/.vim/tmp/backup// " backups
-set directory=~/.vim/tmp/swap//   " swap files
-set backup
-set noswapfile
-
-
-" Navigational Bindings #bindings
+" Navigational Bindings
 " ----------------------------------------
 
 " Go directly to column below instead of wrapping to next line
@@ -65,11 +68,6 @@ nnoremap <C-k> <C-w>k
 nnoremap <silent> + <C-w>>
 nnoremap <silent> _ <C-w><
 
-" NerdTree
-map <Leader>f :NERDTreeToggle<CR>
-nnoremap <Leader>d :NERDTreeFind<CR>
-"map <Leader>f <plug>NERDTreeTabsToggle<CR>
-
 " Move tab left and right (for sorting and rearranging)
 map <Leader>h :tabm -1<CR>
 map <Leader>l :tabm +1<CR>
@@ -78,7 +76,7 @@ map <Leader>l :tabm +1<CR>
 map <Leader>j :tabp<CR>
 map <Leader>k :tabn<CR>
 
-map <Leader>n :tabnew<CR>
+"map <Leader>n :tabnew<CR>
 
 " Fast quit / save
 map <Leader>q :q<CR>
@@ -93,39 +91,61 @@ map <Leader>g :Gblame<CR>
 
 " Quick reloading for binding and function development
 " ----------------------------------------
-map <Leader>b :w<CR>:so ~/.vimrc<CR> :PlugInstall<CR>
-map <Leader>r :w<CR>:so ~/.vimrc<CR>
-nnoremap <leader>v :tabnew ~/.vimrc<cr>
+map <Leader>vi :w<CR>:so ~/.vimrc<CR> :PlugInstall<CR>
+map <Leader>vr :w<CR>:so ~/.vimrc<CR> :echo "Saved and sourced vimrc."<CR>
+"nnoremap <leader>v :tabnew ~/.vimrc<cr>
 
 
 " Start of plugin block
 " ----------------------------------------
 call plug#begin('~/.vim/plugged')
 
-Plug 'scrooloose/syntastic'
-Plug 'scrooloose/nerdtree'
-"Plug 'jistr/vim-nerdtree-tabs'
-"let g:nerdtree_tabs_open_on_console_startup = 1
-let NERDTreeShowHidden=1
+Plug 'L9' "utility functions for vundle?
 
-Plug 'L9'
-Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
-Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
 Plug 'tpope/vim-fireplace'
 Plug 'tpope/vim-classpath'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-rails'
 Plug 'tpope/vim-endwise'
-Plug 'tpope/dispatch'
-Plug 'itchyny/lightline.vim'
-Plug 'junegunn/limelight.vim'
+
 Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'dag/vim-fish'
 Plug 'vim-scripts/omlet.vim'
 Plug 'majutsushi/tagbar'
-Plug 'airblade/vim-gitgutter'
-Plug 'albfan/ag.vim'
+
+
+" TODO: Get this working - it seems to be broken right now
+" Sweet-ass powerline
+" ----------------------------------------
+Plug 'itchyny/lightline.vim'
+
+
+" Languages and Syntax Highlighting
+" ----------------------------------------
+Plug 'scrooloose/syntastic'
+Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plug 'tpope/vim-haml'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-liquid'
+Plug 'digitaltoad/vim-pug'
+Plug 'exu/pgsql.vim'
+Plug 'guns/vim-clojure-static'
+Plug 'elixir-lang/vim-elixir'
+Plug 'kchmck/vim-coffee-script'
+Plug 'groenewege/vim-less'
+Plug 'posva/vim-vue'
+Plug 'dag/vim-fish'
+Plug 'ElmCast/elm-vim'
+let g:elm_format_autosave = 1
+
+
+" Easy, breezy, seamless Rails testing and development
+" ----------------------------------------
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-rails'
+Plug 'tpope/dispatch'
+Plug 'janko-m/vim-test'
 
 
 " Tmux integrations
@@ -143,24 +163,18 @@ map <Leader>vc :VimuxClearRunnerHistory<CR>
 map <Leader>vz :VimuxZoomRunner<CR>
 
 
-" Languages and Syntax Highlighting
+" Simple file browser tree
 " ----------------------------------------
-Plug 'tpope/vim-haml'
-Plug 'tpope/vim-markdown'
-Plug 'tpope/vim-liquid'
-Plug 'digitaltoad/vim-pug'
-Plug 'exu/pgsql.vim'
-Plug 'guns/vim-clojure-static'
-Plug 'elixir-lang/vim-elixir'
-Plug 'kchmck/vim-coffee-script'
-Plug 'groenewege/vim-less'
-Plug 'posva/vim-vue'
-Plug 'ElmCast/elm-vim'
-let g:elm_format_autosave = 1
+Plug 'scrooloose/nerdtree'
+let NERDTreeShowHidden=1
+nnoremap <Leader>nf :NERDTreeToggle<CR>
+nnoremap <Leader>nd :NERDTreeFind<CR>
 
 
+" TODO: User ripgrep for this intead
 " Grep across repository
 " ----------------------------------------
+Plug 'albfan/ag.vim'
 Plug 'mileszs/ack.vim'
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
@@ -244,6 +258,7 @@ nnoremap <leader>t :CtrlPTag<cr>
 
 " Writing mode
 " ----------------------------------------
+"Plug 'junegunn/limelight.vim'
 "Plug 'junegunn/goyo.vim'
 "map <Leader>gy :Goyo<CR>
 "autocmd User GoyoEnter :set linebreak
@@ -252,6 +267,7 @@ nnoremap <leader>t :CtrlPTag<cr>
 "autocmd User GoyoLeave Limelight!
 
 
+" TODO: Figure this shit out. Must have cross platform behavior.
 " Various paste binding strategies to get cross pane, single clipboard effect
 " ----------------------------------------
 
