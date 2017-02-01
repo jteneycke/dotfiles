@@ -13,20 +13,25 @@ set number
 set hlsearch
 set expandtab
 set synmaxcol=550
-set clipboard+=unnamed
-set paste
-
-
-" Store all those temp files the editor makes somewhere out of the way
-" ----------------------------------------
-set undodir=~/.vim/tmp/undo//     " undo files
+set backup
+set noswapfile
 set undofile
 set undolevels=3000
 set undoreload=10000
-set backupdir=~/.vim/tmp/backup// " backups
-set directory=~/.vim/tmp/swap//   " swap files
-set backup
-set noswapfile
+set clipboard+=unnamed
+set paste
+
+" Store all those temp files the editor makes somewhere out of the way
+" ----------------------------------------
+
+" Ensure the temp dirs exist
+call system("mkdir -p ~/.vim/tmp/swap")
+call system("mkdir -p ~/.vim/tmp/backup")
+call system("mkdir -p ~/.vim/tmp/undo")
+" Change where we store swap/undo files
+set dir=~/.vim/tmp/swap/
+set backupdir=~/.vim/tmp/backup/
+set undodir=~/.vim/tmp/undo/
 
 
 " Play nice with tmux
@@ -102,6 +107,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'L9' "utility functions for vundle?
 
+" TODO: Setup bindings for staging lines from gitguttter
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
@@ -162,6 +168,7 @@ nmap <silent> <leader>g :TestVisit<CR>
 
 " Tmux integrations
 " ----------------------------------------
+" TODO: let's use turbux and be cool like Emma :)
 Plug 'keith/tmux.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
