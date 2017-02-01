@@ -31,10 +31,18 @@ alias pbcopy='xclip -selection c'
 alias pbpaste='xclip -selection clipboard -o'
 
 alias gif="git diff"
+alias gis="git diff --staged"
+
+alias gc="git commit -v"
 alias gcm="git commit -m"
 
-function ga () {
-  git add -A "$x" && git status
+function ga() {
+  for dir in "$@"
+  do
+    git add -A "$dir"
+  done
+
+  git status
 }
 
 function biggest-dirs () {
@@ -45,16 +53,31 @@ function vimrc() {
   vim ~/.vimrc
 }
 
-function edit-bash() {
+function sb() {
+  source ~/.bash_profile
+  echo "Sourced bash_profile"
+}
+
+function eb() {
   vim ~/.bash_profile
-  echo "Sourcing bash_profile"
+  echo "Sourced bash_profile"
   source ~/.bash_profile
 }
 
-function edit-tmux() {
+function et() {
   vim ~/.tmux.conf
-  echo "Reloading tmux config"
+  echo "Reloaded tmux config"
   tmux source-file ~/.tmux.conf
+}
+
+# TODO: turn into a file in a dir that we source along with all the rest
+# (natural way to avoid namespace collisions, and use any scripting lang we please for the problem)
+function watch-test() {
+  filewatcher "test/**/*" "clear; zeus test test/$@";
+}
+
+function echo-test() {
+  echo "zeus test test/$@"
 }
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
