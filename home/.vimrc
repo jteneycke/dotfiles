@@ -244,36 +244,36 @@ map <Leader>w :StripWhitespace<CR>
 
 " CtrlP and fuzzy file finding
 " ----------------------------------------
-Plug 'ctrlpvim/ctrlp.vim'
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-let g:ctrlp_match_window_bottom = 1 " Show at top of window
-let g:ctrlp_jump_to_buffer = 'Et' " Jump to tab AND buffer if already open
-"let g:ctrlp_split_window = 1 " <CR> = New Tab
-let g:ctrlp_open_new_file = 't' " Open newly created files in a new tab
-let g:ctrlp_open_multiple_files = 't' " Open multiple files in new tabs
-let g:ctrlp_show_hidden = 1 " Index hidden files
-set wildignore+=*/public/uploads/*
+"Plug 'ctrlpvim/ctrlp.vim'
+"set runtimepath^=~/.vim/bundle/ctrlp.vim
+"let g:ctrlp_match_window_bottom = 1 " Show at top of window
+"let g:ctrlp_jump_to_buffer = 'Et' " Jump to tab AND buffer if already open
+""let g:ctrlp_split_window = 1 " <CR> = New Tab
+"let g:ctrlp_open_new_file = 't' " Open newly created files in a new tab
+"let g:ctrlp_open_multiple_files = 't' " Open multiple files in new tabs
+"let g:ctrlp_show_hidden = 1 " Index hidden files
+"set wildignore+=*/public/uploads/*
 "nnoremap <leader>t :CtrlPTag<cr>
 
 
 " FZF - TODO: Use this instead of CtrlP
 " ----------------------------------------
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-"Plug 'junegunn/fzf.vim'
-"
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
 "start fuzzy finder
-"map <leader>p :FZF<CR>
-"
+nnoremap <C-p> :Files<CR>
+
 "" Mapping selecting mappings
 "nmap <leader><tab> <plug>(fzf-maps-n)
 "xmap <leader><tab> <plug>(fzf-maps-x)
 "omap <leader><tab> <plug>(fzf-maps-o)
-"
-"let g:fzf_layout = { 'down': '~40%' }
-"let g:fzf_action = {
-"  \ 'ctrl-t': 'tab split',
-"  \ 'ctrl-x': 'split',
-"  \ 'ctrl-v': 'vsplit' }
+
+let g:fzf_layout = { 'down': '~20%' }
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
 
 
 " Writing mode
