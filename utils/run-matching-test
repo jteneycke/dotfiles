@@ -4,6 +4,27 @@ require 'filewatcher'
 require 'yaml'
 require 'colored'
 
+def run_test(filename, test_file)
+  system("clear")
+
+  command = "zeus test #{test_file}"
+
+  puts "Saved file: #{filename}".yellow
+  puts "Running:    #{command}".green
+  puts
+  system(command)
+end
+
+def find_test_from_filename(filename)
+  if filename.include?("test")
+    filename
+  else
+    filename.gsub(".rb", "_test.rb")
+    .gsub("app/", "test/")
+  end
+end
+
+
 paths = %w[
 test/**/**
 app/**/**/*
@@ -12,20 +33,12 @@ app/**/**/*
 FileWatcher.new(paths).watch do |filename|
   if filename.end_with?(".rb")
 
-    test_file = if filename.include?("test")
-      filename
+    test = if filename.include?("serializer")
+      # noop
     else
-      filename.gsub(".rb", "_test.rb")
-              .gsub("app/", "test/")
+      find_test_from_filename(filename)
     end
 
-    system("clear")
-
-    command = "zeus test #{test_file}"
-
-    puts "Saved file: #{filename}".yellow
-    puts "Running:    #{command}".green
-    puts
-    system(command)
+    run_test(filename, test)
   end
 end
