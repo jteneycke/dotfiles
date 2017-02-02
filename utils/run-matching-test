@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+require 'filewatcher'
+require 'yaml'
+require 'colored'
+
+paths = %w[
+test/**/**
+app/**/**/*
+]
+
+FileWatcher.new(paths).watch do |filename|
+  if filename.end_with?(".rb")
+
+    test_file = if filename.include?("test")
+      filename
+    else
+      filename.gsub(".rb", "_test.rb")
+              .gsub("app/", "test/")
+    end
+
+    system("clear")
+
+    command = "zeus test #{test_file}"
+
+    puts "Saved file: #{filename}".yellow
+    puts "Running:    #{command}".green
+    puts
+    system(command)
+  end
+end

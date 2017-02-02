@@ -2,6 +2,9 @@
 [ -f ~/.tmux/tmux-completion.bash ] && source ~/.tmux/tmux-completion.bash
 
 PATH=$PATH:/home/deploy/.cargo/bin
+PATH=$PATH:/home/deploy/dotfiles/utils
+
+export FZF_DEFAULT_COMMAND='ag -g ""'
 
 set -o vi
 
@@ -79,5 +82,3 @@ function watch-test() {
 function echo-test() {
   echo "zeus test test/$@"
 }
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
