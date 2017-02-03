@@ -61,7 +61,7 @@ function sb() {
   echo "Sourced bash_profile"
 }
 
-function eb() {
+function cb() {
   vim ~/.bash_profile
   echo "Sourced bash_profile"
   source ~/.bash_profile

@@ -3,6 +3,16 @@
 require 'filewatcher'
 require 'yaml'
 require 'colored'
+require 'pry'
+
+#system("clear")
+#puts "(Loading script with args: #{ARGV})".blue
+#
+#FileWatcher.new(__FILE__).watch do |file|
+#  puts __FILE__
+#  Process.exec(__FILE__, Time.now.to_s)
+#end
+
 
 def run_test(filename, test_file)
   system("clear")
@@ -24,17 +34,33 @@ def find_test_from_filename(filename)
   end
 end
 
+system("clear")
+puts "Waiting for ruby file to be saved...".green
 
 paths = %w[
 test/**/**
 app/**/**/*
 ]
 
+def find_matching_test_for_serializer(filename)
+  puts "Filename: #{filename}"
+
+  puts "controllers"
+
+  dirs = Dir.glob("test/controllers/**/*").map do |path|
+    if path.end_with?(".rb")
+      path.split("/")
+    end
+  end
+  puts dirs
+end
+
+
 FileWatcher.new(paths).watch do |filename|
   if filename.end_with?(".rb")
 
     test = if filename.include?("serializer")
-      # noop
+      find_matching_test_for_serializer(filename)
     else
       find_test_from_filename(filename)
     end
@@ -42,3 +68,9 @@ FileWatcher.new(paths).watch do |filename|
     run_test(filename, test)
   end
 end
+
+
+#binding.pry
+#puts "last line"
+
+
