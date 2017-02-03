@@ -22,7 +22,20 @@ fi
 #setxkbmap -option 'caps:ctrl_modifier'
 #xcape -e 'Caps_Lock=Escape'
 
+## get rid of command not found ##
+alias cd..='cd ..'
+
+## a quick way to get out of current directory ##
+alias ..='cd ..'
+alias ...='cd ../../../'
+alias ....='cd ../../../../'
+alias .....='cd ../../../../'
+alias .4='cd ../../../../'
+alias .5='cd ../../../../..'
+
+
 alias at="tmux a -t"
+alias ta="tmux attach"
 
 alias cag="ag -A 10 -B 10"
 alias sag="sudo apt-get install"
@@ -61,7 +74,15 @@ function sb() {
   echo "Sourced bash_profile"
 }
 
-function cb() {
+function rc(){
+  vim -p ~/.bash_profile ~/.tmux.conf ~/.vimrc
+  source ~/.bash_profile
+  tmux source-file ~/.tmux.conf
+  echo "Sourced bash_profile and tmux.conf"
+}
+
+
+function mb() {
   vim ~/.bash_profile
   echo "Sourced bash_profile"
   source ~/.bash_profile

@@ -186,9 +186,12 @@ Plug 'christoomey/vim-tmux-runner'
 " Simple file browser tree
 " ----------------------------------------
 Plug 'scrooloose/nerdtree'
+let NERDTreeHijackNetrw=1
 let NERDTreeShowHidden=1
-nnoremap <Leader>nf :NERDTreeToggle<CR>
-nnoremap <Leader>nd :NERDTreeFind<CR>
+nnoremap <Leader>f :NERDTreeToggle<CR>
+nnoremap <Leader>d :NERDTreeFind<CR>
+
+Plug 'tpope/vim-vinegar'
 
 
 " TODO: User ripgrep for this intead

@@ -59,13 +59,15 @@ end
 FileWatcher.new(paths).watch do |filename|
   if filename.end_with?(".rb")
 
-    test = if filename.include?("serializer")
-      find_matching_test_for_serializer(filename)
+    if filename.include?("serializer")
+      #test = find_matching_test_for_serializer(filename)
+      puts "Save the controller or test that uses #{filename}".red
     else
-      find_test_from_filename(filename)
+      test = find_test_from_filename(filename)
+      run_test(filename, test)
     end
 
-    run_test(filename, test)
+    #run_test(filename, test)
   end
 end
 
