@@ -36,12 +36,12 @@ set undodir=~/.vim/tmp/undo/
 
 " Play nice with tmux
 " ----------------------------------------
-set mouse=a
-if has("mouse_sgr")
-  set ttymouse=sgr
-else
-  set ttymouse=xterm2
-end
+" set mouse=a
+" if has("mouse_sgr")
+"   set ttymouse=sgr
+" else
+"   set ttymouse=xterm2
+" end
 
 if &term =~ '256color'
   " Disable Background Color Erase (BCE) so that color schemes
@@ -49,23 +49,30 @@ if &term =~ '256color'
   " See also http://snk.tuxfamily.org/log/vim-256color-bce.html
   set t_ut=
 endif
-set term=screen-256color
+
+" set term=screen-256color
 
 
 " Navigational Bindings
 " ----------------------------------------
 
 " Go directly to column below instead of wrapping to next line
-nnoremap j gj
-nnoremap k gk
+"nnoremap j gj
+"nnoremap k gk
 
 " Fast up / down across blank lines
 nnoremap <S-j> }
 nnoremap <S-k> {
 
 " Same split bind semantic as fzf find buffer
-nnoremap <C-v> :vsplit<CR>
-nnoremap <C-x> :split<CR>
+"nnoremap <C-v> :vsplit<CR>
+"nnoremap <C-x> :split<CR>
+
+nmap <leader>sh :topleft  vnew<CR>
+nmap <leader>sl :botright vnew<CR>
+
+nmap <leader>sk :topleft  new<CR>
+nmap <leader>sj :botright new<CR>
 
 " Easy splitted window navigation
 nnoremap <C-h> <C-w>h
@@ -74,7 +81,8 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 
 " Fast quit / save
-nnoremap <C-c> :q<CR>
+" Can't believe I've been using :q all these years like a sucker!
+map <Leader>q :clo<CR>
 nnoremap <C-s> :w<CR>:echo "Saved file ${filename}"<CR>
 
 " Resize pane
@@ -114,6 +122,10 @@ Plug 'L9' "utility functions for vundle?
 " TODO: Setup bindings for staging lines from gitguttter
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+"Plug 'tpope/vim-commentary'
+Plug 'scrooloose/nerdcommenter'
+"map <Leader>c :NERDComToggleComment<CR>
+
 
 Plug 'tpope/vim-fireplace'
 Plug 'tpope/vim-classpath'
@@ -123,13 +135,17 @@ Plug 'tpope/vim-endwise'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'vim-scripts/omlet.vim'
 Plug 'majutsushi/tagbar'
-
+Plug 'Shougo/vimproc.vim'
+Plug 'Shougo/vimshell.vim'
 
 " TODO: Get this working - it seems to be broken right now
 " Sweet-ass powerline
 " ----------------------------------------
 Plug 'itchyny/lightline.vim'
-
+Plug 'itchyny/lightline-powerful'
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ }
 
 " Languages and Syntax Highlighting
 " ----------------------------------------
@@ -281,7 +297,7 @@ nnoremap <C-p> :Files<CR>
 "xmap <leader><tab> <plug>(fzf-maps-x)
 "omap <leader><tab> <plug>(fzf-maps-o)
 
-let g:fzf_layout = { 'down': '~20%' }
+let g:fzf_layout = { 'down': '~10%' }
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
