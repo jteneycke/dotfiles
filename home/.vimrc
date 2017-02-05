@@ -63,6 +63,10 @@ nnoremap k gk
 nnoremap <S-j> }
 nnoremap <S-k> {
 
+" Same split bind semantic as fzf find buffer
+nnoremap <C-v> :vsplit<CR>
+nnoremap <C-x> :split<CR>
+
 " Easy splitted window navigation
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
@@ -197,8 +201,8 @@ Plug 'tpope/vim-vinegar'
 " TODO: User ripgrep for this intead
 " Grep across repository
 " ----------------------------------------
-Plug 'albfan/ag.vim'
 Plug 'mileszs/ack.vim'
+Plug 'albfan/ag.vim'
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
