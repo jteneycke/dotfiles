@@ -73,6 +73,10 @@ nnoremap <C-l> <C-w>l
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 
+" Fast quit / save
+nnoremap <C-c> :q<CR>
+nnoremap <C-s> :w<CR>:echo "Saved file ${filename}"<CR>
+
 " Resize pane
 nnoremap <silent> + <C-w>>
 nnoremap <silent> _ <C-w><
@@ -86,10 +90,6 @@ map <Leader>j :tabp<CR>
 map <Leader>k :tabn<CR>
 
 "map <Leader>n :tabnew<CR>
-
-" Fast quit / save
-map <Leader>q :q<CR>
-map <Leader>s :w<CR>
 
 " Paste last line of pry history to buffer
 nmap <Leader>ph :<c-u>let pc = (v:count1 ? v:count1 : 1)<cr>:read !tail -<c-r>=pc<cr> ~/.pry_history<cr>:.-<c-r>=pc-1<cr>:norm <c-r>=pc<cr>==<cr>
@@ -185,7 +185,7 @@ Plug 'christoomey/vim-tmux-runner'
 "map <Leader>vs :VimuxInterruptRunner<CR>
 "map <Leader>vc :VimuxClearRunnerHistory<CR>
 "map <Leader>vz :VimuxZoomRunner<CR>
-
+Plug 'skywind3000/asyncrun.vim'
 
 " Simple file browser tree
 " ----------------------------------------
