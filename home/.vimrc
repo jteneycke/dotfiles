@@ -57,8 +57,8 @@ endif
 " ----------------------------------------
 
 " Go directly to column below instead of wrapping to next line
-"nnoremap j gj
-"nnoremap k gk
+nnoremap j gj
+nnoremap k gk
 
 " Fast up / down across blank lines
 nnoremap <S-j> }
@@ -68,11 +68,14 @@ nnoremap <S-k> {
 "nnoremap <C-v> :vsplit<CR>
 "nnoremap <C-x> :split<CR>
 
-nmap <leader>sh :topleft  vnew<CR>
-nmap <leader>sl :botright vnew<CR>
+nmap <leader>- :split<CR>
+nmap <leader>\ :vsplit<CR>
 
-nmap <leader>sk :topleft  new<CR>
-nmap <leader>sj :botright new<CR>
+"nmap <leader>sh :topleft  vnew<CR>
+"nmap <leader>sl :botright vnew<CR>
+
+"nmap <leader>sk :topleft  new<CR>
+"nmap <leader>sj :botright new<CR>
 
 " Easy splitted window navigation
 nnoremap <C-h> <C-w>h
@@ -269,28 +272,14 @@ map <Leader>w :StripWhitespace<CR>
 "  vmap <Leader>t: :Tabularize /:\zs<CR>
 "endif
 
-
-" CtrlP and fuzzy file finding
-" ----------------------------------------
-"Plug 'ctrlpvim/ctrlp.vim'
-"set runtimepath^=~/.vim/bundle/ctrlp.vim
-"let g:ctrlp_match_window_bottom = 1 " Show at top of window
-"let g:ctrlp_jump_to_buffer = 'Et' " Jump to tab AND buffer if already open
-""let g:ctrlp_split_window = 1 " <CR> = New Tab
-"let g:ctrlp_open_new_file = 't' " Open newly created files in a new tab
-"let g:ctrlp_open_multiple_files = 't' " Open multiple files in new tabs
-"let g:ctrlp_show_hidden = 1 " Index hidden files
-"set wildignore+=*/public/uploads/*
-"nnoremap <leader>t :CtrlPTag<cr>
-
-
-" FZF - TODO: Use this instead of CtrlP
+" FZF
 " ----------------------------------------
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 "start fuzzy finder
 nnoremap <C-p> :Files<CR>
+map <Leader>; :Files<CR>
 
 "" Mapping selecting mappings
 "nmap <leader><tab> <plug>(fzf-maps-n)
