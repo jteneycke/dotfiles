@@ -13,6 +13,7 @@ if [ "$TERM" != "linux" ]; then
     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 fi
 
+alias chrome-extensions="/Users/josh/Library/Application Support/Google/Chrome/Default/Extensions"
 
 # ctrl -> hold ctrl
 # esc  -> tap  ctrl
