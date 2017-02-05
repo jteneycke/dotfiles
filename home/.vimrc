@@ -1,6 +1,16 @@
+" Brief help
+" :PlugList          - list configured bundles
+" :PlugInstall(!)    - install(update) bundles
+" :PlugSearch(!) foo - search(or refresh cache first) for foo
+" :PlugClean(!)      - confirm(or auto-approve) removal of unused bundles
+"
+" see :h vundle for more details or wiki for FAQ
+" NOTE: comments after Plug command are not allowed..
+
 set nocompatible
 syntax on
 filetype off
+filetype plugin indent on
 
 " Take me to your leader! What's that? He's the biggest key on the board?
 let mapleader=" "
@@ -20,6 +30,11 @@ set undolevels=3000
 set undoreload=10000
 set clipboard+=unnamed
 set paste
+
+if (has("termguicolors"))
+  set termguicolors
+endif
+set background=dark
 
 " Store all those temp files the editor makes somewhere out of the way
 " ----------------------------------------
@@ -83,6 +98,11 @@ nnoremap <C-l> <C-w>l
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
+
 " Fast quit / save
 " Can't believe I've been using :q all these years like a sucker!
 map <Leader>q :clo<CR>
@@ -100,27 +120,49 @@ map <Leader>l :tabm +1<CR>
 map <Leader>j :tabp<CR>
 map <Leader>k :tabn<CR>
 
+" What should new tab be?
 "map <Leader>n :tabnew<CR>
 
+" This is probably going to be obsoleted now that we've got terminal in vim
 " Paste last line of pry history to buffer
 nmap <Leader>ph :<c-u>let pc = (v:count1 ? v:count1 : 1)<cr>:read !tail -<c-r>=pc<cr> ~/.pry_history<cr>:.-<c-r>=pc-1<cr>:norm <c-r>=pc<cr>==<cr>
 
 " Who's to blame!
 map <Leader>g :Gblame<CR>
 
-
-" Quick reloading for binding and function development
+" Quick reloading for binding and function development (The proverbial Escher hand drawing the hand.)
 " ----------------------------------------
-map <Leader>vi :w<CR>:so ~/.vimrc<CR> :PlugInstall<CR>
-map <Leader>vr :w<CR>:so ~/.vimrc<CR> :echo "Saved and sourced vimrc."<CR>
-"nnoremap <leader>v :tabnew ~/.vimrc<cr>
+map <Leader>pi :w<CR>:so ~/.vimrc<CR> :PlugInstall<CR>
+map <Leader>vs :w<CR>:so ~/.vimrc<CR> :echo "Saved and sourced vimrc."<CR>
+map <leader>vrc :tabnew ~/.vimrc<cr>
 
 
 " Start of plugin block
 " ----------------------------------------
 call plug#begin('~/.vim/plugged')
 
-Plug 'L9' "utility functions for vundle?
+
+" FZF
+" ----------------------------------------
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+"start fuzzy finder
+nnoremap <C-p> :Files<CR>
+map <Leader>; :Files<CR>
+
+"" Mapping selecting mappings
+"nmap <leader><tab> <plug>(fzf-maps-n)
+"xmap <leader><tab> <plug>(fzf-maps-x)
+"omap <leader><tab> <plug>(fzf-maps-o)
+
+let g:fzf_layout = { 'down': '~10%' }
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+"Plug 'L9' "utility functions for vundle?
 
 " TODO: Setup bindings for staging lines from gitguttter
 Plug 'tpope/vim-fugitive'
@@ -129,6 +171,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdcommenter'
 "map <Leader>c :NERDComToggleComment<CR>
 
+"Plug 'jceb/vim-orgmode'
 
 Plug 'tpope/vim-fireplace'
 Plug 'tpope/vim-classpath'
@@ -146,9 +189,9 @@ Plug 'Shougo/vimshell.vim'
 " ----------------------------------------
 Plug 'itchyny/lightline.vim'
 Plug 'itchyny/lightline-powerful'
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ }
+"let g:lightline = {
+      "\ 'colorscheme': 'wombat',
+      "\ }
 
 " Languages and Syntax Highlighting
 " ----------------------------------------
@@ -173,21 +216,21 @@ let g:elm_format_autosave = 1
 " ----------------------------------------
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-rails'
+
 "Plug 'tpope/dispatch'
 "Plug 'skalnik/vim-vroom'
 "let g:vroom_use_zeus = 1
-
 " run bash command on current_file name
 "nmap <silent> <leader>t :!echo %:p
 
 " close, but needs to do it in a seperate pane
-Plug 'janko-m/vim-test'
-let test#strategy = "vtr"
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>T :TestFile<CR>
-nmap <silent> <leader>a :TestSuite<CR>
-nmap <silent> <leader>l :TestLast<CR>
-nmap <silent> <leader>g :TestVisit<CR>
+"Plug 'janko-m/vim-test'
+"let test#strategy = "vtr"
+"nmap <silent> <leader>t :TestNearest<CR>
+"nmap <silent> <leader>T :TestFile<CR>
+"nmap <silent> <leader>a :TestSuite<CR>
+"nmap <silent> <leader>l :TestLast<CR>
+"nmap <silent> <leader>g :TestVisit<CR>
 
 " Tmux integrations
 " ----------------------------------------
@@ -204,6 +247,8 @@ Plug 'christoomey/vim-tmux-runner'
 "map <Leader>vs :VimuxInterruptRunner<CR>
 "map <Leader>vc :VimuxClearRunnerHistory<CR>
 "map <Leader>vz :VimuxZoomRunner<CR>
+
+
 Plug 'skywind3000/asyncrun.vim'
 
 " Simple file browser tree
@@ -217,7 +262,6 @@ nnoremap <Leader>d :NERDTreeFind<CR>
 Plug 'tpope/vim-vinegar'
 
 
-" TODO: User ripgrep for this intead
 " Grep across repository
 " ----------------------------------------
 Plug 'mileszs/ack.vim'
@@ -233,22 +277,13 @@ endif
 noremap <Leader>a :Ack <cword><cr>
 
 
-" Colorschemes
-" ----------------------------------------
-Plug 'morhetz/gruvbox'
-Plug 'joshdick/onedark.vim'
-Plug 'tomasr/molokai'
-let g:rehash256 = 1
-colorscheme molokai
-
-
 " Indent Settings
 " ----------------------------------------
 Plug 'nathanaelkane/vim-indent-guides'
 set ts=2 sw=2 et
 let g:indent_guides_start_level = 2
 let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_auto_colors = 0
+let g:indent_guides_auto_colors = 1
 "autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=grey    ctermbg=235
 "autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=darkgrey ctermbg=236
 
@@ -272,26 +307,6 @@ map <Leader>w :StripWhitespace<CR>
 "  vmap <Leader>t: :Tabularize /:\zs<CR>
 "endif
 
-" FZF
-" ----------------------------------------
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-
-"start fuzzy finder
-nnoremap <C-p> :Files<CR>
-map <Leader>; :Files<CR>
-
-"" Mapping selecting mappings
-"nmap <leader><tab> <plug>(fzf-maps-n)
-"xmap <leader><tab> <plug>(fzf-maps-x)
-"omap <leader><tab> <plug>(fzf-maps-o)
-
-let g:fzf_layout = { 'down': '~10%' }
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
-
 
 " Writing mode
 " ----------------------------------------
@@ -304,53 +319,28 @@ let g:fzf_action = {
 "autocmd User GoyoLeave Limelight!
 
 
-" TODO: Figure this shit out. Must have cross platform behavior.
-" Various paste binding strategies to get cross pane, single clipboard effect
+" A hack to cut and paste between vim instances in the event of a non-functing system clipboard
 " ----------------------------------------
+"vmap <silent> <S-y> y:new ~/.vimbuf<CR>VGp:x<CR>
+"map <S-p> :r ~/.vimbuf<CR>
 
-"vmap <S-y> y:new ~/.vimbuf<CR>VGp:x<CR>:!xclip -selection c < ~/.vimbuf<CR><CR>
-"vmap <S-y> y:new ~/.vimbuf<CR>VGp:x<CR>:!xclip -selection c < ~/.vimbuf<CR><CR>
-"vmap <S-y> y:new ~/.vimbuf<CR>VGp:x<CR>:!xclip -i < ~/.vimbuf<CR><CR>
-vmap <silent> <S-y> y:new ~/.vimbuf<CR>VGp:x<CR>
-map <S-p> :r ~/.vimbuf<CR>
 
-" Remove trailing white space
-"nnoremap <Leader>w :%s/\s\+$// <CR>
-
-" copy to buffer
-"vmap <C-c> :w! ~/.vimbuffer<CR>
-"nmap <C-c> :.w! ~/.vimbuffer<CR>
-"" paste from buffer
-"map <C-p> :r ~/.vimbuffer<CR>
-
-" yank and paste to sytem clipboard
-"nnoremap y "+y
-"nnoremap p "+p
-
-" some other crap that doesn't work
-"vmap <Leader>y "+y
-"vmap <Leader>d "+d
-"nmap <Leader>p "+p
-"nmap <Leader>P "+P
-"vmap <Leader>p "+p
-"vmap <Leader>P "+P
-
-"Plug 'NLKNguyen/copy-cut-paste.vim'
-"let g:copy_cut_paste_no_mappings = 1
-"vmap <S-y> <Plug>CCP_CopyText
-"nmap <S-p> <Plug>CCP_PasteText
-
-"Plug 'christoomey/vim-system-copy'
-" turn this into a function bound to keybinding
-":execute 'new | 0read ! testy' expand('%')
-
+" Colorschemes
+" ----------------------------------------
+Plug 'colepeters/spacemacs-theme.vim'
+Plug 'morhetz/gruvbox'
+Plug 'joshdick/onedark.vim'
+Plug 'tomasr/molokai'
+"let g:rehash256 = 1
+"colorscheme molokai
 
 " End of plugin declarations and loading
 " ----------------------------------------
 call plug#end()
 
+colorscheme spacemacs-theme
 
-" Make vim defaults more bearable
+" Over ride some vim default weirdness. Perhaps not needed with nvim now?
 " ----------------------------------------
 
 " automatically resize window
@@ -358,41 +348,9 @@ au VimResized * exe "normal! \<c-w>="
 
 " Only show cursorline in the current window and in normal mode.
 augroup cline
-    au!
-    au WinLeave * set nocursorline
-    au WinEnter * set cursorline
-    au InsertEnter * set nocursorline
-    au InsertLeave * set cursorline
+  au!
+  au WinLeave * set nocursorline
+  au WinEnter * set cursorline
+  au InsertEnter * set nocursorline
+  au InsertLeave * set cursorline
 augroup END
-
-
-" File associations for syntax highlighting
-" ----------------------------------------
-au BufNewFile,BufRead *.sql set filetype=pgsql
-au BufNewFile,BufRead *.ejs* set filetype=html
-au BufNewFile,BufRead *.html.slim set filetype=slim
-au BufNewFile,BufRead *.pde set filetype=java
-au BufNewFile,BufRead *.hl set filetype=clojure
-au BufNewFile,BufRead *.liso set filetype=julia
-au BufNewFile,BufRead *.vala set filetype=cs
-au BufNewFile,BufRead *.odocl set filetype=ocaml
-au BufNewFile,BufRead *.topscript set filetype=ocaml
-au BufNewFile,BufRead *.rawscript set filetype=ocaml
-au BufNewFile,BufRead .pryrc set filetype=ruby
-au BufNewFile,BufRead *.jbuilder set filetype=ruby
-au BufNewFile,BufRead *.cr set filetype=ruby
-au BufNewFile,BufRead *.thor set filetype=ruby
-au BufNewFile,BufRead *.routes set filetype=erlang
-au BufNewFile,BufRead rebar.config set filetype=erlang
-au BufRead,BufNewFile schema.rb set filetype=txt
-
-filetype plugin indent on     " required!
-"
-" Brief help
-" :PlugList          - list configured bundles
-" :PlugInstall(!)    - install(update) bundles
-" :PlugSearch(!) foo - search(or refresh cache first) for foo
-" :PlugClean(!)      - confirm(or auto-approve) removal of unused bundles
-"
-" see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Plug command are not allowed..
