@@ -1,0 +1,78 @@
+#!/usr/bin/env ruby
+
+require 'filewatcher'
+require 'yaml'
+require 'colored'
+require 'pry'
+
+#system("clear")
+#puts "(Loading script with args: #{ARGV})".blue
+#
+#FileWatcher.new(__FILE__).watch do |file|
+#  puts __FILE__
+#  Process.exec(__FILE__, Time.now.to_s)
+#end
+
+
+def run_test(filename, test_file)
+  system("clear")
+
+  command = "zeus test #{test_file}"
+
+  puts "Saved file: #{filename}".yellow
+  puts "Running:    #{command}".green
+  puts
+  system(command)
+end
+
+def find_test_from_filename(filename)
+  if filename.include?("test")
+    filename
+  else
+    filename.gsub(".rb", "_test.rb")
+    .gsub("app/", "test/")
+  end
+end
+
+system("clear")
+puts "Waiting for ruby file to be saved...".green
+
+paths = %w[
+test/**/**
+app/**/**/*
+]
+
+def find_matching_test_for_serializer(filename)
+  puts "Filename: #{filename}"
+
+  puts "controllers"
+
+  dirs = Dir.glob("test/controllers/**/*").map do |path|
+    if path.end_with?(".rb")
+      path.split("/")
+    end
+  end
+  puts dirs
+end
+
+
+FileWatcher.new(paths).watch do |filename|
+  if filename.end_with?(".rb")
+
+    if filename.include?("serializer")
+      #test = find_matching_test_for_serializer(filename)
+      puts "Save the controller or test that uses #{filename}".red
+    else
+      test = find_test_from_filename(filename)
+      run_test(filename, test)
+    end
+
+    #run_test(filename, test)
+  end
+end
+
+
+#binding.pry
+#puts "last line"
+
+

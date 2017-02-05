@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+require 'filewatcher'
+require 'yaml'
+require 'colored'
+
+require 'sys/proctable'
+include Sys
+
+CURRENT_FILE_NAME = __FILE__.split("/").last
+
+def find_process_by_name(name)
+  ProcTable.ps.find do |ps|
+    ps.cmdline.end_with?(name)
+  end
+end
+
+
+FileWatcher.new("/home/deploy/dotfiles/utils").watch do |file|
+  unless file.include?(CURRENT_FILE_NAME)
+    puts file
+    puts "Running on pid: " + find_process_by_name("run-matching-test").pid.to_s
+  end
+end

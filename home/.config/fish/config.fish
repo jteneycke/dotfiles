@@ -43,6 +43,8 @@ function git-rm
   git rm -r --cached (echo $argv);
 end
 
+alias gc="git commit"
+
 function gcm
   git commit -m (echo $argv);
 end
@@ -52,7 +54,7 @@ function gcb
 end
 
 function ga
-  git add -A;
+  git add -A (echo $argv);
   git status;
 end
 
@@ -62,6 +64,10 @@ end
 
 function gif
   git diff
+end
+
+function gis
+  git diff --staged
 end
 
 function cag
@@ -77,3 +83,4 @@ function f
 end
 
 source ~/.asdf/asdf.fish
+#rvm default
