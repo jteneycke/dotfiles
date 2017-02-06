@@ -10,6 +10,8 @@ function fish_prompt
   ~/.powerline-shell/powerline-shell.py $status --shell bare ^/dev/null
 end
 
+alias vim="nvim"
+
 # Work aliases
 function clear-sessions
   telnet localhost 11211;
