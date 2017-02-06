@@ -8,6 +8,8 @@ export FZF_DEFAULT_COMMAND='ag -g ""'
 
 set -o vi
 
+alias vim="nvim"
+
 function _update_ps1() {
     PS1="$(~/.powerline-shell/powerline-shell.py $? 2> /dev/null)"
 }
@@ -83,7 +85,7 @@ function rc(){
 }
 
 
-function mb() {
+function bashrc() {
   vim ~/.bash_profile
   echo "Sourced bash_profile"
   source ~/.bash_profile
