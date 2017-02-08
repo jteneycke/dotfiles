@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+current_branch = `git rev-parse --abbrev-ref HEAD`
+
+system("branch=#{current_branch} to=staging mina deploy -vvv")

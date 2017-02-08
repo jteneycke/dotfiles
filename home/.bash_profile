@@ -36,6 +36,10 @@ alias .....='cd ../../../../'
 alias .4='cd ../../../../'
 alias .5='cd ../../../../..'
 
+function gem-cd() {
+  echo "Changing into gem directory for $1"
+  cd $(bundle show $1)
+}
 
 alias at="tmux a -t"
 alias ta="tmux attach"
