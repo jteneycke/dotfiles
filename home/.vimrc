@@ -12,6 +12,27 @@ syntax on
 filetype off
 filetype plugin indent on
 
+set nolazyredraw
+set termguicolors
+
+" Terminal colors
+let g:terminal_color_0  = '#2e3436'
+let g:terminal_color_1  = '#cc0000'
+let g:terminal_color_2  = '#4e9a06'
+let g:terminal_color_3  = '#c4a000'
+let g:terminal_color_4  = '#3465a4'
+let g:terminal_color_5  = '#75507b'
+let g:terminal_color_6  = '#0b939b'
+let g:terminal_color_7  = '#d3d7cf'
+let g:terminal_color_8  = '#555753'
+let g:terminal_color_9  = '#ef2929'
+let g:terminal_color_10 = '#8ae234'
+let g:terminal_color_11 = '#fce94f'
+let g:terminal_color_12 = '#729fcf'
+let g:terminal_color_13 = '#ad7fa8'
+let g:terminal_color_14 = '#00f5e9'
+let g:terminal_color_15 = '#eeeeec'
+
 " Take me to your leader! What's that? He's the biggest key on the board?
 let mapleader=" "
 
@@ -31,10 +52,10 @@ set undoreload=10000
 set clipboard+=unnamed
 set paste
 
-if (has("termguicolors"))
-  set termguicolors
-endif
-set background=dark
+"if (has("termguicolors"))
+"  set termguicolors
+"endif
+"set background=dark
 
 " Store all those temp files the editor makes somewhere out of the way
 " ----------------------------------------
@@ -93,15 +114,15 @@ nmap <leader>\ :vsplit<CR>
 "nmap <leader>sj :botright new<CR>
 
 " Easy splitted window navigation
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
+"nnoremap <C-h> <C-w>h
+"nnoremap <C-l> <C-w>l
+"nnoremap <C-j> <C-w>j
+"nnoremap <C-k> <C-w>k
 
-tnoremap <C-h> <C-\><C-n><C-w>h
-tnoremap <C-j> <C-\><C-n><C-w>j
-tnoremap <C-k> <C-\><C-n><C-w>k
-tnoremap <C-l> <C-\><C-n><C-w>l
+"tnoremap <C-h> <C-\><C-n><C-w>h
+"tnoremap <C-j> <C-\><C-n><C-w>j
+"tnoremap <C-k> <C-\><C-n><C-w>k
+"tnoremap <C-l> <C-\><C-n><C-w>l
 
 " Fast quit / save
 " Can't believe I've been using :q all these years like a sucker!
@@ -136,6 +157,59 @@ map <Leader>pi :w<CR>:so ~/.vimrc<CR> :PlugInstall<CR>
 map <Leader>vs :w<CR>:so ~/.vimrc<CR> :echo "Saved and sourced vimrc."<CR>
 map <leader>vrc :tabnew ~/.vimrc<cr>
 
+" Y to copy until end of line, like D
+map Y y$
+
+" Terminal Bindings
+" ----------------------------------------
+"map <Leader>t :split term://bash<CR>
+tnoremap <A-h> <C-\><C-n><C-w>h
+tnoremap <A-j> <C-\><C-n><C-w>j
+tnoremap <A-k> <C-\><C-n><C-w>k
+tnoremap <A-l> <C-\><C-n><C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
+
+" https://vi.stackexchange.com/questions/3670/how-to-enter-insert-mode-when-entering-neovim-terminal-pane
+autocmd BufWinEnter,WinEnter term://* startinsert
+autocmd BufLeave term://* stopinsert
+
+"tnoremap <Esc> <C-\><C-n>
+
+
+" https://medium.com/@garoth/neovim-terminal-usecases-tricks-8961e5ac19b9#.xqgzmptda
+" Window split settings
+highlight TermCursor ctermfg=red guifg=red
+set splitbelow
+set splitright
+
+" Terminal settings
+tnoremap <Leader><ESC> <C-\><C-n>
+
+" Window navigation function
+" Make ctrl-h/j/k/l move between windows and auto-insert in terminals
+"func! s:mapMoveToWindowInDirection(direction)
+    "func! s:maybeInsertMode(direction)
+        "stopinsert
+        "execute "wincmd" a:direction
+
+        "if &buftype == 'terminal'
+            "startinsert!
+        "endif
+    "endfunc
+
+    "execute "tnoremap" "<silent>" "<C-" . a:direction . ">"
+                "\ "<C-\\><C-n>"
+                "\ ":call <SID>maybeInsertMode(\"" . a:direction . "\")<CR>"
+    "execute "nnoremap" "<silent>" "<C-" . a:direction . ">"
+                "\ ":call <SID>maybeInsertMode(\"" . a:direction . "\")<CR>"
+"endfunc
+"for dir in ["h", "j", "l", "k"]
+    "call s:mapMoveToWindowInDirection(dir)
+"endfor
+
 
 " Start of plugin block
 " ----------------------------------------
@@ -163,6 +237,8 @@ let g:fzf_action = {
   \ 'ctrl-v': 'vsplit' }
 
 "Plug 'L9' "utility functions for vundle?
+
+"Plug 'roman/golden-ratio'
 
 " TODO: Setup bindings for staging lines from gitguttter
 Plug 'tpope/vim-fugitive'

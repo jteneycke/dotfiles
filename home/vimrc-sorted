@@ -1,0 +1,137 @@
+Plug 'ElmCast/elm-vim'
+Plug 'Shougo/vimproc.vim'
+Plug 'Shougo/vimshell.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'albfan/ag.vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-runner'
+Plug 'colepeters/spacemacs-theme.vim'
+Plug 'dag/vim-fish'
+Plug 'digitaltoad/vim-pug'
+Plug 'elixir-lang/vim-elixir'
+Plug 'exu/pgsql.vim'
+Plug 'groenewege/vim-less'
+Plug 'guns/vim-clojure-static'
+Plug 'itchyny/lightline-powerful'
+Plug 'itchyny/lightline.vim'
+Plug 'joshdick/onedark.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'kchmck/vim-coffee-script'
+Plug 'keith/tmux.vim'
+Plug 'majutsushi/tagbar'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'mileszs/ack.vim'
+Plug 'morhetz/gruvbox'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'posva/vim-vue'
+Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'tomasr/molokai'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-classpath'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fireplace'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-haml'
+Plug 'tpope/vim-liquid'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-vinegar'
+Plug 'vim-scripts/omlet.vim'
+au VimResized * exe "normal! \<c-w>="
+augroup END
+augroup cline
+autocmd BufLeave term://* stopinsert
+autocmd BufWinEnter,WinEnter term://* startinsert
+call plug#begin('~/.vim/plugged')
+call plug#end()
+call system("mkdir -p ~/.vim/tmp/backup")
+call system("mkdir -p ~/.vim/tmp/swap")
+call system("mkdir -p ~/.vim/tmp/undo")
+colorscheme spacemacs-theme
+endif
+endif
+endif
+endif
+filetype off
+filetype plugin indent on
+highlight TermCursor ctermfg=red guifg=red
+if &term =~ '256color'
+if (has("termguicolors"))
+if executable('ag')
+if executable('rg')
+let NERDTreeHijackNetrw=1
+let NERDTreeShowHidden=1
+let g:elm_format_autosave = 1
+let g:fzf_action = {
+let g:fzf_layout = { 'down': '~10%' }
+let g:indent_guides_auto_colors = 1
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 2
+let g:indentobject_meaningful_indentation = ["haml", "sass", "python", "yaml", "markdown"]
+let mapleader=" "
+map <Leader>; :Files<CR>
+map <Leader>g :Gblame<CR>
+map <Leader>h :tabm -1<CR>
+map <Leader>j :tabp<CR>
+map <Leader>k :tabn<CR>
+map <Leader>l :tabm +1<CR>
+map <Leader>pi :w<CR>:so ~/.vimrc<CR> :PlugInstall<CR>
+map <Leader>q :clo<CR>
+map <Leader>vs :w<CR>:so ~/.vimrc<CR> :echo "Saved and sourced vimrc."<CR>
+map <Leader>w :StripWhitespace<CR>
+map <leader>vrc :tabnew ~/.vimrc<cr>
+map Y y$
+nmap <Leader>ph :<c-u>let pc = (v:count1 ? v:count1 : 1)<cr>:read !tail -<c-r>=pc<cr> ~/.pry_history<cr>:.-<c-r>=pc-1<cr>:norm <c-r>=pc<cr>==<cr>
+nmap <leader>- :split<CR>
+nmap <leader>\ :vsplit<CR>
+nnoremap ; :
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
+nnoremap <C-p> :Files<CR>
+nnoremap <C-s> :w<CR>:echo "Saved file ${filename}"<CR>
+nnoremap <Leader>d :NERDTreeFind<CR>
+nnoremap <Leader>f :NERDTreeToggle<CR>
+nnoremap <S-j> }
+nnoremap <S-k> {
+nnoremap <silent> + <C-w>>
+nnoremap <silent> _ <C-w><
+nnoremap j gj
+nnoremap k gk
+noremap <Leader>a :Ack <cword><cr>
+set background=dark
+set backup
+set backupdir=~/.vim/tmp/backup/
+set clipboard+=unnamed
+set dir=~/.vim/tmp/swap/
+set expandtab
+set hlsearch
+set nocompatible
+set nolazyredraw
+set noswapfile
+set number
+set paste
+set shell=/bin/bash
+set splitbelow
+set splitright
+set synmaxcol=550
+set ts=2 sw=2 et
+set undodir=~/.vim/tmp/undo/
+set undofile
+set undolevels=3000
+set undoreload=10000
+syntax on
+tnoremap <A-h> <C-\><C-n><C-w>h
+tnoremap <A-j> <C-\><C-n><C-w>j
+tnoremap <A-k> <C-\><C-n><C-w>k
+tnoremap <A-l> <C-\><C-n><C-w>l
+tnoremap <Leader><ESC> <C-\><C-n>

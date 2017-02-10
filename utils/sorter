@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+
+require "chainable_methods"
+require 'filewatcher'
+require 'colored'
+require "pry"
+
+
+#puts Time.new.to_s.green
+puts "(Loaded script with args: #{ARGV})".yellow
+
+vimrc = CM("#{Dir.home}/dotfiles/home/vimrc-sorted")
+				.open
+				.read
+				.split("\n")
+				.map{|x| x.gsub(/\s+/, ' ') }
+				.uniq
+				.map{|x| x.split(" ").first }
+				.uniq
+				.unwrap
+
+binding.pry
+
+# building progressive pipelines
+
+# Every time I save this file
+# it should kill the existing one
+# and restart in the pane it was running in
+# vim save binding to restart!
+
+# Calls itself again when we save it
+FileWatcher.new(__FILE__).watch do |file|
+  puts __FILE__
+  Process.exec(__FILE__, Time.now.to_s)
+end
+
+#def q
+#  exit # kill this file
+#end
+
+## repl loop
+#at_exit do
+# 	system("clear")
+#   exec("sorter") # run it again
+#end

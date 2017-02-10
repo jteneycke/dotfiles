@@ -1,0 +1,46 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ArgumentParser	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^from argparse import ArgumentParser$/;"	i
+BaseFishGenerator	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^class BaseFishGenerator(object):$/;"	c
+DockerCmdLine	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^class DockerCmdLine(object):$/;"	c
+DockerComposeCmdLine	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^class DockerComposeCmdLine(DockerCmdLine):$/;"	c
+DockerComposeFishGenerator	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^class DockerComposeFishGenerator(BaseFishGenerator):$/;"	c
+DockerFishGenerator	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^class DockerFishGenerator(BaseFishGenerator):$/;"	c
+Subcommand	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^class Subcommand(object):$/;"	c
+Switch	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^class Switch(object):$/;"	c
+__init__	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^    def __init__(self, command, description, args, switches):$/;"	m	class:Subcommand
+__init__	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^    def __init__(self, docker):$/;"	m	class:BaseFishGenerator
+__init__	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^    def __init__(self, docker_path):$/;"	m	class:DockerCmdLine
+__init__	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^    def __init__(self, shorts, longs, description, metavar):$/;"	m	class:Switch
+_sessions	home/.tmux/tmux-completion.bash	/^_sessions() {$/;"	f
+_tmux	home/.tmux/tmux-completion.bash	/^_tmux() {$/;"	f
+binary	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^    binary = 'docker'$/;"	v	class:DockerCmdLine
+binary	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^    binary = 'docker-compose'$/;"	v	class:DockerComposeCmdLine
+common_options	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^    def common_options(self):$/;"	m	class:BaseFishGenerator
+common_options	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^    def common_options(self):$/;"	m	class:DockerCmdLine
+find_matching_test_for_serializer	utils/run-matching-test	/^def find_matching_test_for_serializer(filename)$/;"	f
+find_process_by_name	utils/meta-watcher	/^def find_process_by_name(name)$/;"	f
+find_test_from_filename	utils/run-matching-test	/^def find_test_from_filename(filename)$/;"	f
+fish_completion	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^    def fish_completion(self):$/;"	m	class:Switch
+generate	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^    def generate(self):$/;"	m	class:BaseFishGenerator
+get_output	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^    def get_output(self, *args):$/;"	m	class:DockerCmdLine
+header	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^    def header(self):$/;"	m	class:BaseFishGenerator
+header_text	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^    header_text = ''$/;"	v	class:BaseFishGenerator
+is_file_target	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^    def is_file_target(self):$/;"	m	class:Switch
+main	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^def main():$/;"	f
+os	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^import os$/;"	i
+parse_switch	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^    def parse_switch(self, line):$/;"	m	class:DockerCmdLine
+process_subcommand_arg	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^    def process_subcommand_arg(self, sub, arg):$/;"	m	class:BaseFishGenerator
+process_subcommand_arg	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^    def process_subcommand_arg(self, sub, arg):$/;"	m	class:DockerComposeFishGenerator
+process_subcommand_arg	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^    def process_subcommand_arg(self, sub, arg):$/;"	m	class:DockerFishGenerator
+re	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^import re$/;"	i
+run_test	utils/run-matching-test	/^def run_test(filename, test_file)$/;"	f
+subcommand	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^    def subcommand(self, command, description):$/;"	m	class:DockerCmdLine
+subcommands	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^    def subcommands(self):$/;"	m	class:BaseFishGenerator
+subcommands	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^    def subcommands(self):$/;"	m	class:DockerCmdLine
+subprocess	home/.config/docker-fish-completion/gen_docker_fish_completions.py	/^import subprocess$/;"	i
+symlink	linker.sh	/^function symlink {$/;"	f
