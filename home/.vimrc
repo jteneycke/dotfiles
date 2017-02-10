@@ -13,7 +13,7 @@ filetype off
 filetype plugin indent on
 
 set nolazyredraw
-set termguicolors
+"set termguicolors
 
 " Terminal colors
 let g:terminal_color_0  = '#2e3436'
@@ -52,10 +52,10 @@ set undoreload=10000
 set clipboard+=unnamed
 set paste
 
-"if (has("termguicolors"))
-"  set termguicolors
-"endif
-"set background=dark
+if (has("termguicolors"))
+  set termguicolors
+endif
+set background=dark
 
 " Store all those temp files the editor makes somewhere out of the way
 " ----------------------------------------
