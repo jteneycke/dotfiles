@@ -89,6 +89,11 @@ endif
 " set term=screen-256color
 
 
+" Easy esacpe
+" ----------------------------------------
+tnoremap <Esc> <C-\><C-n>
+
+
 " Navigational Bindings
 " ----------------------------------------
 
@@ -107,13 +112,26 @@ nnoremap <S-k> {
 nmap <leader>- :split<CR>
 nmap <leader>\ :vsplit<CR>
 
+
 nmap <leader>s :retab<CR>:w<CR>:echom "Saved file"<CR>
 
 "nmap <leader>sh :topleft  vnew<CR>
 "nmap <leader>sl :botright vnew<CR>
 
-"nmap <leader>sk :topleft  new<CR>
-"nmap <leader>sj :botright new<CR>
+"nmap <leader>sh :topleft  vnew<CR>
+"nmap <leader>sl :botright vnew<CR>
+
+"nmap <leader>th :topleft  vnew<CR>
+"nmap <leader>tl :botright vnew<CR>
+
+"nmap <leader>tk :topleft  new<CR>
+"nmap <leader>tj :botright new<CR>
+
+nmap <leader>th :topleft  term bash<CR>
+nmap <leader>tl :botright vnew<CR>
+
+nmap <leader>tk :topleft  new<CR>
+nmap <leader>tj :botright new<CR>
 
 " Easy splitted window navigation
 "nnoremap <C-h> <C-w>h
@@ -128,20 +146,20 @@ nmap <leader>s :retab<CR>:w<CR>:echom "Saved file"<CR>
 
 " Fast quit / save
 " Can't believe I've been using :q all these years like a sucker!
-map <Leader>q :clo<CR>
-nnoremap <C-s> :w<CR>:echo "Saved file ${filename}"<CR>
+nmap <Leader>q :clo<CR>
+nmap <Leader>s :w<CR> :echo "Saved: " . @% . " at: " . strftime("%c")<CR>
 
 " Resize pane
 nnoremap <silent> + <C-w>>
 nnoremap <silent> _ <C-w><
 
 " Move tab left and right (for sorting and rearranging)
-map <Leader>h :tabm -1<CR>
-map <Leader>l :tabm +1<CR>
+nmap <Leader>h :tabm -1<CR>
+nmap <Leader>l :tabm +1<CR>
 
 " Go forwards and backwards a tab
-map <Leader>j :tabp<CR>
-map <Leader>k :tabn<CR>
+nmap <Leader>j :tabp<CR>
+nmap <Leader>k :tabn<CR>
 
 " What should new tab be?
 "map <Leader>n :tabnew<CR>
@@ -151,13 +169,13 @@ map <Leader>k :tabn<CR>
 nmap <Leader>ph :<c-u>let pc = (v:count1 ? v:count1 : 1)<cr>:read !tail -<c-r>=pc<cr> ~/.pry_history<cr>:.-<c-r>=pc-1<cr>:norm <c-r>=pc<cr>==<cr>
 
 " Who's to blame!
-map <Leader>g :Gblame<CR>
+nmap <Leader>g :Gblame<CR>
 
 " Quick reloading for binding and function development (The proverbial Escher hand drawing the hand.)
 " ----------------------------------------
-map <Leader>pi :w<CR>:so ~/.vimrc<CR> :PlugInstall<CR>
-map <Leader>vs :w<CR>:so ~/.vimrc<CR> :echo "Saved and sourced vimrc."<CR>
-map <leader>vrc :tabnew ~/.vimrc<cr>
+nmap <Leader>pi :w<CR>:so ~/.vimrc<CR> :PlugInstall<CR>
+nmap <Leader>vs :w<CR>:so ~/.vimrc<CR> :echo "Saved and sourced vimrc."<CR>
+nmap <leader>ve :tabnew ~/.vimrc<CR>
 
 " Y to copy until end of line, like D
 
