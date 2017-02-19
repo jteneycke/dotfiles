@@ -107,6 +107,8 @@ nnoremap <S-k> {
 nmap <leader>- :split<CR>
 nmap <leader>\ :vsplit<CR>
 
+nmap <leader>s :retab<CR>:w<CR>:echom "Saved file"<CR>
+
 "nmap <leader>sh :topleft  vnew<CR>
 "nmap <leader>sl :botright vnew<CR>
 
@@ -158,6 +160,7 @@ map <Leader>vs :w<CR>:so ~/.vimrc<CR> :echo "Saved and sourced vimrc."<CR>
 map <leader>vrc :tabnew ~/.vimrc<cr>
 
 " Y to copy until end of line, like D
+
 map Y y$
 
 " Terminal Bindings
@@ -215,11 +218,23 @@ tnoremap <Leader><ESC> <C-\><C-n>
 " ----------------------------------------
 call plug#begin('~/.vim/plugged')
 
+"Plug 'sjbach/lusty'
+
 
 " FZF
 " ----------------------------------------
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+
+Plug 'junegunn/vim-easy-align'
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+
 
 "start fuzzy finder
 nnoremap <C-p> :Files<CR>
@@ -284,6 +299,7 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'groenewege/vim-less'
 Plug 'posva/vim-vue'
 Plug 'dag/vim-fish'
+Plug 'posva/vim-vue'
 Plug 'ElmCast/elm-vim'
 let g:elm_format_autosave = 1
 
@@ -292,6 +308,7 @@ let g:elm_format_autosave = 1
 " ----------------------------------------
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-rails'
+Plug 'BlakeWilliams/vim-pry'
 
 "Plug 'tpope/dispatch'
 "Plug 'skalnik/vim-vroom'
@@ -355,11 +372,14 @@ noremap <Leader>a :Ack <cword><cr>
 
 " Indent Settings
 " ----------------------------------------
+"Plug 'Yggdroot/indentLine'
+
 Plug 'nathanaelkane/vim-indent-guides'
 set ts=2 sw=2 et
 let g:indent_guides_start_level = 2
 let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_auto_colors = 1
+"let g:indent_guides_auto_colors = 1
+
 "autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=grey    ctermbg=235
 "autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=darkgrey ctermbg=236
 
@@ -415,6 +435,8 @@ Plug 'tomasr/molokai'
 call plug#end()
 
 colorscheme spacemacs-theme
+
+"let g:indentLine_showFirstIndentLevel = 1
 
 " Over ride some vim default weirdness. Perhaps not needed with nvim now?
 " ----------------------------------------

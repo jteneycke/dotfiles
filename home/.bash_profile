@@ -41,6 +41,15 @@ function gem-cd() {
   cd $(bundle show $1)
 }
 
+# https://stackoverflow.com/questions/6958689/xargs-with-multiple-commands-as-argument
+function each() {
+  while read line; do
+    for f in "$@"; do
+      $f $line
+    done
+  done
+}
+
 alias at="tmux a -t"
 alias ta="tmux attach"
 
