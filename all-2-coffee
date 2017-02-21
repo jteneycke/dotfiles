@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+find . -type f -name '*.js' | while read f; do echo "grinding $f to ${f/.js/.coffee} "; js2coffee "$f" > "${f/.js/.coffee}"; done
+
+
