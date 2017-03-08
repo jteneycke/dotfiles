@@ -4,6 +4,8 @@
 PATH=$PATH:/home/deploy/.cargo/bin
 PATH=$PATH:/home/deploy/dotfiles/utils
 
+EDITOR=nvim
+
 export FZF_DEFAULT_COMMAND='ag -g ""'
 
 set -o vi
@@ -49,6 +51,12 @@ function each() {
     done
   done
 }
+
+alias stage-puma-stop="to=staging mina puma:stop"
+alias stage-puma-start="to=staging mina puma:start"
+alias rails-local="rails s puma -b 127.0.0.1"
+
+alias f="rg -C 5"
 
 alias at="tmux a -t"
 alias ta="tmux attach"

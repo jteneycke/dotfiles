@@ -7,6 +7,13 @@
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Plug command are not allowed..
 
+"function hashify
+	":'<,'>s/"\]/\:/g<CR>
+
+"	:'<,'>s/$/,/g<CR>
+"endfunction
+
+
 set nocompatible
 syntax on
 filetype off
@@ -57,6 +64,10 @@ if (has("termguicolors"))
 endif
 set background=dark
 
+command! -nargs=1 TS setlocal ts=<args> sts=<args> sw=<args>
+autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 expandtab
+
+
 " Store all those temp files the editor makes somewhere out of the way
 " ----------------------------------------
 
@@ -88,6 +99,34 @@ endif
 
 " set term=screen-256color
 
+" Return indent (all whitespace at start of a line), converted from
+" tabs to spaces if what = 1, or from spaces to tabs otherwise.
+" When converting to tabs, result has no redundant spaces.
+function! Indenting(indent, what, cols)
+  let spccol = repeat(' ', a:cols)
+  let result = substitute(a:indent, spccol, '\t', 'g')
+  let result = substitute(result, ' \+\ze\t', '', 'g')
+  if a:what == 1
+    let result = substitute(result, '\t', spccol, 'g')
+  endif
+  return result
+endfunction
+
+" Convert whitespace used for indenting (before first non-whitespace).
+" what = 0 (convert spaces to tabs), or 1 (convert tabs to spaces).
+" cols = string with number of columns per tab, or empty to use 'tabstop'.
+" The cursor position is restored, but the cursor will be in a different
+" column when the number of characters in the indent of the line is changed.
+function! IndentConvert(line1, line2, what, cols)
+  let savepos = getpos('.')
+  let cols = empty(a:cols) ? &tabstop : a:cols
+  execute a:line1 . ',' . a:line2 . 's/^\s\+/\=Indenting(submatch(0), a:what, cols)/e'
+  call histdel('search', -1)
+  call setpos('.', savepos)
+endfunction
+command! -nargs=? -range=% Space2Tab call IndentConvert(<line1>,<line2>,0,<q-args>)
+command! -nargs=? -range=% Tab2Space call IndentConvert(<line1>,<line2>,1,<q-args>)
+command! -nargs=? -range=% RetabIndent call IndentConvert(<line1>,<line2>,&et,<q-args>)<Paste>
 
 " Easy esacpe
 " ----------------------------------------
@@ -244,15 +283,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-Plug 'junegunn/vim-easy-align'
-
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-
-
+Plug 'Chiel92/vim-autoformat'
 
 "start fuzzy finder
 nnoremap <C-p> :Files<CR>
@@ -304,7 +335,7 @@ Plug 'itchyny/lightline-powerful'
 
 " Languages and Syntax Highlighting
 " ----------------------------------------
-Plug 'scrooloose/syntastic'
+"Plug 'scrooloose/syntastic'
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plug 'tpope/vim-haml'
 Plug 'tpope/vim-markdown'
@@ -360,7 +391,7 @@ Plug 'christoomey/vim-tmux-runner'
 "map <Leader>vz :VimuxZoomRunner<CR>
 
 
-Plug 'skywind3000/asyncrun.vim'
+"Plug 'skywind3000/asyncrun.vim'
 
 " Simple file browser tree
 " ----------------------------------------
@@ -411,15 +442,15 @@ Plug 'ntpeters/vim-better-whitespace'
 map <Leader>w :StripWhitespace<CR>
 
 
-" Align hashes, json, and whatnot by a given character
+" Easy align
 " ----------------------------------------
-"Plug 'godlygeek/tabular'
-"if exists(":Tabularize")
-"  nmap <Leader>t= :Tabularize /=<CR>
-"  vmap <Leader>t= :Tabularize /=<CR>
-"  nmap <Leader>t: :Tabularize /:\zs<CR>
-"  vmap <Leader>t: :Tabularize /:\zs<CR>
-"endif
+Plug 'junegunn/vim-easy-align'
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaiph)
+nmap ga <Plug>(EasyAlign)
 
 
 " Writing mode
@@ -453,6 +484,7 @@ Plug 'tomasr/molokai'
 call plug#end()
 
 colorscheme spacemacs-theme
+
 
 "let g:indentLine_showFirstIndentLevel = 1
 
