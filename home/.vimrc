@@ -284,6 +284,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 Plug 'Chiel92/vim-autoformat'
+Plug 'vim-scripts/DirDo.vim'
 
 "start fuzzy finder
 nnoremap <C-p> :Files<CR>
