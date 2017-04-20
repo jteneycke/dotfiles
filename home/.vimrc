@@ -57,7 +57,10 @@ set undofile
 set undolevels=3000
 set undoreload=10000
 set clipboard+=unnamed
-set paste
+"set paste
+set noai
+
+
 
 if (has("termguicolors"))
   set termguicolors
@@ -308,9 +311,28 @@ let g:fzf_action = {
 " TODO: Setup bindings for staging lines from gitguttter
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-"Plug 'tpope/vim-commentary'
+
 Plug 'scrooloose/nerdcommenter'
-"map <Leader>c :NERDComToggleComment<CR>
+let g:NERDCreateDefaultMappings = 0
+map <Leader>l <Plug>NERDCommenterInvert
+
+
+
+"Plug 'tpope/vim-commentary'
+"Plug 'tpope/vim-commentary'
+""Plug 'sudar/comments.vim'
+"let g:comments_map_keys = 0
+"" key-mappings for comment line in normal mode
+"noremap  <silent> <Leader>l :call CommentLine()<CR>
+"" key-mappings for range comment lines in visual <Shift-V> mode
+"vnoremap <silent> <Leader>l :call RangeCommentLine()<CR>
+"
+"" key-mappings for un-comment line in normal mode
+"noremap  <silent> <Leader>c :call UnCommentLine()<CR>
+"" key-mappings for range un-comment lines in visual <Shift-V> mode
+"vnoremap <silent> <Leader>c :call RangeUnCommentLine()<CR>
+
+
 
 "Plug 'jceb/vim-orgmode'
 
@@ -324,6 +346,14 @@ Plug 'vim-scripts/omlet.vim'
 Plug 'majutsushi/tagbar'
 Plug 'Shougo/vimproc.vim'
 Plug 'Shougo/vimshell.vim'
+
+Plug 'terryma/vim-multiple-cursors'
+let g:multi_cursor_use_default_mapping=0
+" Default mapping
+let g:multi_cursor_next_key='<M-n>'
+let g:multi_cursor_prev_key='<M-p>'
+let g:multi_cursor_skip_key='<M-x>'
+let g:multi_cursor_quit_key='<Esc>'
 
 " TODO: Get this working - it seems to be broken right now
 " Sweet-ass powerline
@@ -353,12 +383,15 @@ Plug 'posva/vim-vue'
 Plug 'ElmCast/elm-vim'
 let g:elm_format_autosave = 1
 
+"Plug 'neowit/vim-force.com'
+Plug 'benburwell/vim-syntax-apex'
 
 " Easy, breezy, seamless Rails testing and development
 " ----------------------------------------
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-rails'
 Plug 'BlakeWilliams/vim-pry'
+"Plug 'sovetnik/vim-minispec'
 
 "Plug 'tpope/dispatch'
 "Plug 'skalnik/vim-vroom'
@@ -368,7 +401,7 @@ Plug 'BlakeWilliams/vim-pry'
 
 " close, but needs to do it in a seperate pane
 "Plug 'janko-m/vim-test'
-"let test#strategy = "vtr"
+"let test#strategy = "neovim"
 "nmap <silent> <leader>t :TestNearest<CR>
 "nmap <silent> <leader>T :TestFile<CR>
 "nmap <silent> <leader>a :TestSuite<CR>
@@ -424,10 +457,18 @@ noremap <Leader>a :Ack <cword><cr>
 " ----------------------------------------
 "Plug 'Yggdroot/indentLine'
 
+"let g:indentLine_char = '⎸'
+"let g:indentLine_color_term = 239
+
+"" https://github.com/nathanaelkane/vim-indent-guides/issues/46#issuecomment-9444925
+"exe 'syn match Guides ''%(^%( {'.&sw.'})*)@<= '' conceal cchar=|'
+"setl conceallevel=2 concealcursor=nc
+
 Plug 'nathanaelkane/vim-indent-guides'
 set ts=2 sw=2 et
 let g:indent_guides_start_level = 2
 let g:indent_guides_enable_on_vim_startup = 1
+
 "let g:indent_guides_auto_colors = 1
 
 "autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=grey    ctermbg=235
@@ -486,6 +527,7 @@ call plug#end()
 
 colorscheme spacemacs-theme
 
+autocmd BufNewFile,BufRead *.apex set syntax=apex
 
 "let g:indentLine_showFirstIndentLevel = 1
 

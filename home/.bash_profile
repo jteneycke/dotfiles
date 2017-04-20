@@ -43,6 +43,15 @@ function gem-cd() {
   cd $(bundle show $1)
 }
 
+function rebase-master(){
+  git checkout master && git pull && git checkout - && git rebase master
+}
+
+function ssh-it() {
+  eval `ssh-agent -s`;
+  ssh-add
+}
+
 # https://stackoverflow.com/questions/6958689/xargs-with-multiple-commands-as-argument
 function each() {
   while read line; do
@@ -52,9 +61,16 @@ function each() {
   done
 }
 
-alias stage-puma-stop="to=staging mina puma:stop"
-alias stage-puma-start="to=staging mina puma:start"
-alias rails-local="rails s puma -b 127.0.0.1"
+function stage-puma-restart() {
+  to=staging mina puma:stop
+  to=staging mina puma:start
+}
+
+#alias stage-puma-stop="to=staging mina puma:stop"
+#alias stage-puma-start="to=staging mina puma:start"
+
+alias serve-www="rails s puma -b 127.0.0.1 -p 3000"
+alias serve-api="rails s puma -b 127.0.0.1 -p 3001"
 
 alias f="rg -C 5"
 
@@ -73,6 +89,7 @@ alias pbpaste='xclip -selection clipboard -o'
 alias gif="git diff"
 alias gis="git diff --staged"
 
+alias gap="git add -p"
 alias gc="git commit -v"
 alias gcm="git commit -m"
 
