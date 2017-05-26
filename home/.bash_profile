@@ -22,6 +22,46 @@ fi
 
 alias chrome-extensions="/Users/josh/Library/Application Support/Google/Chrome/Default/Extensions"
 
+function confirm()
+{
+  #alert the user what they are about to do.
+  echo -e "Run? \e[0;96m$@\e[m";
+  #confirm with the user
+  read -r -p "Are you sure? [Y/n]" response
+  case "$response" in
+    [yY][eE][sS]|[yY])
+      #if yes, then execute the passed parameters
+      "$@"
+      ;;
+    *)
+      #Otherwise exit...
+      echo "Did not run command."
+      #exit
+      ;;
+  esac
+}
+
+function deploy-to() {
+  confirm to=$1 branch=$(git rev-parse --abbrev-ref HEAD) mina deploy --trace
+}
+
+function recent-branches() {
+  git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format='%(refname:short)' | head -n 10
+}
+
+function bundle-ctags() {
+  ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)
+}
+
+function test-migrate() {
+  RAILS_ENV=test bundle exec rake db:migrate db:test:prepare;
+  RAILS_ENV=test bundle exec rake db:seed;
+}
+
+function test-clone-structure() {
+  bundle exec rake db:test:clone_structure
+}
+
 # ctrl -> hold ctrl
 # esc  -> tap  ctrl
 #setxkbmap -option 'caps:ctrl_modifier'
@@ -69,8 +109,8 @@ function stage-puma-restart() {
 #alias stage-puma-stop="to=staging mina puma:stop"
 #alias stage-puma-start="to=staging mina puma:start"
 
-alias serve-www="rails s puma -b 127.0.0.1 -p 3000"
-alias serve-api="rails s puma -b 127.0.0.1 -p 3001"
+alias serve-3000="rails s puma -b 127.0.0.1 -p 3000"
+alias serve-3001="rails s puma -b 127.0.0.1 -p 3001"
 
 alias f="rg -C 5"
 

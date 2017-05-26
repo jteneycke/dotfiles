@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+# https://stackoverflow.com/a/19458217
+# $ cat file | clipboard
+# $ clipboard | less
+
+if [ "$(uname)" == "Darwin" ]; then
+
+  if [[ -p /dev/stdin ]] ; then
+      # stdin is a pipe
+      # stdin -> clipboard
+      pbcopy
+  else
+      # stdin is not a pipe
+      # clipboard -> stdout
+      pbpaste
+  fi
+
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+
+	if command -v xclip 1>/dev/null; then
+			if [[ -p /dev/stdin ]] ; then
+					# stdin is a pipe
+					# stdin -> clipboard
+					xclip -i -selection clipboard
+			else
+					# stdin is not a pipe
+					# clipboard -> stdout
+					xclip -o -selection clipboard
+			fi
+	else
+			echo "Remember to install xclip"
+	fi
+
+else
+    echo "Can't tell what platform this is."
+fi

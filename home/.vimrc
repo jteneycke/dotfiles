@@ -58,8 +58,10 @@ set undolevels=3000
 set undoreload=10000
 set clipboard+=unnamed
 "set paste
+set nopaste
 set noai
 
+set magic
 
 
 if (has("termguicolors"))
@@ -317,7 +319,6 @@ let g:NERDCreateDefaultMappings = 0
 map <Leader>l <Plug>NERDCommenterInvert
 
 
-
 "Plug 'tpope/vim-commentary'
 "Plug 'tpope/vim-commentary'
 ""Plug 'sudar/comments.vim'
@@ -382,6 +383,8 @@ Plug 'dag/vim-fish'
 Plug 'posva/vim-vue'
 Plug 'ElmCast/elm-vim'
 let g:elm_format_autosave = 1
+
+Plug 'jaxbot/semantic-highlight.vim'
 
 "Plug 'neowit/vim-force.com'
 Plug 'benburwell/vim-syntax-apex'
@@ -521,13 +524,23 @@ Plug 'tomasr/molokai'
 "let g:rehash256 = 1
 "colorscheme molokai
 
+Plug 'vim-scripts/SQLUtilities'
+
+Plug 'xolox/vim-session'
+Plug 'xolox/vim-misc'
+
+let g:session_autoload = 'no'
+
+
 " End of plugin declarations and loading
-" ----------------------------------------
+" ----------------------------------------'
 call plug#end()
 
 colorscheme spacemacs-theme
 
 autocmd BufNewFile,BufRead *.apex set syntax=apex
+autocmd BufNewFile,BufRead *.rabl set syntax=ruby
+
 
 "let g:indentLine_showFirstIndentLevel = 1
 
