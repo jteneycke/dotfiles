@@ -365,6 +365,16 @@ Plug 'itchyny/lightline-powerful'
       "\ 'colorscheme': 'wombat',
       "\ }
 
+let g:lightline = {
+      \ 'component_function': {
+      \   'filename': 'LightlineFilename',
+      \ },
+      \ }
+
+function! LightlineFilename()
+  return expand('%:f') !=# '' ? expand('%:f') : '[No Name]'
+endfunction
+
 " Languages and Syntax Highlighting
 " ----------------------------------------
 "Plug 'scrooloose/syntastic'

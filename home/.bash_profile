@@ -3,6 +3,7 @@
 
 PATH=$PATH:/home/deploy/.cargo/bin
 PATH=$PATH:/home/deploy/dotfiles/utils
+PATH=$PATH:/home/deploy/.local/bin
 
 EDITOR=nvim
 
@@ -21,6 +22,19 @@ if [ "$TERM" != "linux" ]; then
 fi
 
 alias chrome-extensions="/Users/josh/Library/Application Support/Google/Chrome/Default/Extensions"
+
+alias c="clear"
+
+alias api="cd ~/actively_developing/api"
+alias www="cd ~/actively_developing/www"
+alias router="cd ~/actively_developing/router"
+alias dotfiles="cd ~/dotfiles"
+
+alias mas="git checkout master"
+
+function git-user-stats() {
+  git ls-tree --name-only -z -r HEAD | egrep -z -Z -E '\.(rb|txt)$' | xargs -0 -n1 git blame --line-porcelain | grep "^author " | sort | uniq -c | sort -nr
+}
 
 function confirm()
 {
@@ -51,6 +65,10 @@ function recent-branches() {
 
 function bundle-ctags() {
   ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)
+}
+
+function ctag-me(){
+  ctags -R --languages=ruby --exclude=.git --exclude=log .
 }
 
 function test-migrate() {
