@@ -71,6 +71,7 @@ set background=dark
 
 command! -nargs=1 TS setlocal ts=<args> sts=<args> sw=<args>
 autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 expandtab
+autocmd FileType haml setlocal shiftwidth=2 tabstop=2 expandtab
 
 
 " Store all those temp files the editor makes somewhere out of the way
