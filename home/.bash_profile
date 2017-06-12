@@ -12,6 +12,7 @@ export FZF_DEFAULT_COMMAND='ag -g ""'
 set -o vi
 
 alias vim="nvim"
+alias tmuxrc="nvim ~/.tmux.conf"
 
 function _update_ps1() {
     PS1="$(~/.powerline-shell/powerline-shell.py $? 2> /dev/null)"
