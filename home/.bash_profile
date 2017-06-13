@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 [ -f ~/.bashrc ] && source ~/.bashrc
 [ -f ~/.tmux/tmux-completion.bash ] && source ~/.tmux/tmux-completion.bash
 
@@ -19,6 +21,27 @@ alias www="cd ~/actively_developing/www"
 # ==========================================================================
 set -o vi
 EDITOR=nvim
+alias vim="nvim"
+
+v() {
+  local file
+  file="$(fzf)" && nvim "${file}" || return 1
+}
+
+#bindkey '^P' vim $(fzf)
+bind -x '"\C-p": v'
+
+# fkill - kill process
+fkill() {
+  local pid
+  pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+
+  if [ "x$pid" != "x" ]
+  then
+    echo $pid | xargs kill -${1:-9}
+  fi
+}
+
 
 # Get rid of command not found
 alias cd..='cd ..'
@@ -47,7 +70,6 @@ function bashrc() {
 
 # Vim
 # ==========================================================================
-alias vim="nvim"
 function vimrc() {
   vim ~/.vimrc
 }
