@@ -549,6 +549,11 @@ call plug#end()
 
 colorscheme spacemacs-theme
 
+" Very nice!
+set fillchars+=vert:│
+hi VertSplit ctermbg=NONE guibg=NONE
+
+
 autocmd BufNewFile,BufRead *.apex set syntax=apex
 autocmd BufNewFile,BufRead *.rabl set syntax=ruby
 
