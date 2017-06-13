@@ -424,9 +424,18 @@ Plug 'BlakeWilliams/vim-pry'
 
 " Tmux integrations
 " ----------------------------------------
-" TODO: let's use turbux and be cool like Emma :)
 Plug 'keith/tmux.vim'
+
+"Plug 'drmikehenry/vim-fixkey'
 Plug 'christoomey/vim-tmux-navigator'
+let g:tmux_navigator_no_mappings = 1
+"nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
+"nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
+"nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
+"nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
+"nnoremap <silent> <M-\> :TmuxNavigatePrevious<cr>
+
+
 Plug 'christoomey/vim-tmux-runner'
 "Plug 'benmills/vimux'
 "map <Leader>rb :call VimuxRunCommand("clear; rspec " . bufname("%"))<CR>
