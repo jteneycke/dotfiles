@@ -63,7 +63,6 @@ set noai
 
 set magic
 
-
 if (has("termguicolors"))
   set termguicolors
 endif
@@ -138,7 +137,6 @@ command! -nargs=? -range=% RetabIndent call IndentConvert(<line1>,<line2>,&et,<q
 " ----------------------------------------
 tnoremap <Esc> <C-\><C-n>
 
-
 " Navigational Bindings
 " ----------------------------------------
 
@@ -156,7 +154,6 @@ nnoremap <S-k> {
 
 nmap <leader>- :split<CR>
 nmap <leader>\ :vsplit<CR>
-
 
 nmap <leader>s :retab<CR>:w<CR>:echom "Saved file"<CR>
 
@@ -191,7 +188,8 @@ nmap <leader>tj :botright new<CR>
 
 " Fast quit / save
 " Can't believe I've been using :q all these years like a sucker!
-nmap <Leader>q :clo<CR>
+"nmap <Leader>q :clo!<CR>
+nmap <Leader>q :q!<CR>
 nmap <Leader>s :w<CR> :echo "Saved: " . @% . " at: " . strftime("%c")<CR>
 
 " Resize pane
@@ -219,12 +217,8 @@ nmap <Leader>g :Gblame<CR>
 " Quick reloading for binding and function development (The proverbial Escher hand drawing the hand.)
 " ----------------------------------------
 nmap <Leader>pi :w<CR>:so ~/.vimrc<CR> :PlugInstall<CR>
-nmap <Leader>vs :w<CR>:so ~/.vimrc<CR> :echo "Saved and sourced vimrc."<CR>
+nmap <Leader>r :w<CR>:so ~/.vimrc<CR> :echo "Saved and sourced vimrc."<CR>
 nmap <leader>ve :tabnew ~/.vimrc<CR>
-
-" Y to copy until end of line, like D
-
-map Y y$
 
 " Terminal Bindings
 " ----------------------------------------
@@ -428,7 +422,7 @@ Plug 'keith/tmux.vim'
 
 "Plug 'drmikehenry/vim-fixkey'
 Plug 'christoomey/vim-tmux-navigator'
-let g:tmux_navigator_no_mappings = 1
+"let g:tmux_navigator_no_mappings = 1
 "nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
 "nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
 "nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
@@ -532,7 +526,14 @@ nmap ga <Plug>(EasyAlign)
 " A hack to cut and paste between vim instances in the event of a non-functing system clipboard
 " ----------------------------------------
 "vmap <silent> <S-y> y:new ~/.vimbuf<CR>VGp:x<CR>
-"map <S-p> :r ~/.vimbuf<CR>
+"map <S-p> :r ~/.vim" Yank to file
+"map y y:e ~/.vim/clipboard.tmp<CR>P:w <CR><CR>:bdelete!<CR>
+" Y to copy until end of line, like D
+"map Y y$
+
+""nnoremap y :'<,'>w! ~/.vim/clipboard.tmp<CR>:echo 'Copied!'<CR>
+"map y :'<,'>w! ~/.vim/clipboard.tmp<CR>
+"map p :exe 'norm i' . system("cat ~/.vim/clipboard.tmp")<CR>
 
 
 " Colorschemes

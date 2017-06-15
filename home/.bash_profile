@@ -28,6 +28,15 @@ v() {
   file="$(fzf)" && nvim "${file}" || return 1
 }
 
+#eval "$(fasd --init auto)"
+working-on-v() {
+  local file
+  #file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && nvim "${file}" || return 1
+  file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)"
+  echo "File: $file"
+  echo "\$1:  $1"
+}
+
 #bindkey '^P' vim $(fzf)
 bind -x '"\C-p": v'
 
