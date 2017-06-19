@@ -288,6 +288,7 @@ Plug 'vim-scripts/DirDo.vim'
 
 "start fuzzy finder
 nnoremap <C-p> :Files<CR>
+nnoremap <C-o> :GFiles?<CR>
 map <Leader>; :Files<CR>
 
 "" Mapping selecting mappings

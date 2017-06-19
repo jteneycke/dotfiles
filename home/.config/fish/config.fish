@@ -27,6 +27,8 @@ function ctag-rails-and-deps
   ctags -R --languages=ruby --exclude=.git --exclude=log .
 end
 
+alias tmuxrc="nvim ~/.tmux.conf"
+
 # Personal Aliases
 
 set fish_greeting ""

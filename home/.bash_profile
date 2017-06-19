@@ -9,12 +9,35 @@ PATH=$PATH:/home/deploy/.cargo/bin
 PATH=$PATH:/home/deploy/dotfiles/utils
 PATH=$PATH:/home/deploy/.local/bin
 
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+
+source ~/dotfiles/fzf-tmux
 
 # Work
 # ==========================================================================
 alias dotfiles="cd ~/dotfiles"
 alias api="cd ~/actively_developing/api"
 alias www="cd ~/actively_developing/www"
+
+ #This is the same functionality as fzf's ctrl-t, except that the file or
+ #directory selected is now automatically cd'ed or opened, respectively.
+#fzf-open-file-or-dir() {
+  #local cmd="command find -L . \
+    #\\( -path '*/\\.*' -o -fstype 'dev' -o -fstype 'proc' \\) -prune \
+    #-o -type f -print \
+    #-o -type d -print \
+    #-o -type l -print 2> /dev/null | sed 1d | cut -b3-"
+  #local out=$(eval $cmd | fzf-tmux --exit-0)
+
+  #if [ -f "$out" ]; then
+    #$EDITOR "$out" < /dev/tty
+  #elif [ -d "$out" ]; then
+    #cd "$out"
+    #zle reset-prompt
+  #fi
+#}
+#zle     -N   fzf-open-file-or-dir
+#bind -x '"\C-p": fzf-open-file-or-dir'
 
 
 # Bash sugar
