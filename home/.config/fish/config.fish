@@ -1,6 +1,7 @@
 #fish_vi_key_bindings
 
 set PATH ~/scripts $PATH
+set PATH ~/dotfiles/utils $PATH
 set PATH /Applications/Postgres.app/Contents/Versions/latest/bin $PATH
 set PATH ~/.cargo/bin $PATH
 
@@ -16,6 +17,24 @@ alias vim="nvim"
 function clear-sessions
   telnet localhost 11211;
   flush_all;
+end
+
+
+alias serve-3000="rails s puma -b 127.0.0.1 -p 3000"
+alias serve-3001="rails s puma -b 127.0.0.1 -p 3001"
+
+function stage-puma-restart
+  env to=staging mina puma:stop
+  env to=staging mina puma:start
+end
+
+function test-migrate
+  env RAILS_ENV=test bundle exec rake db:migrate db:test:prepare;
+  env RAILS_ENV=test bundle exec rake db:seed;
+end
+
+function test-clone-structure
+  bundle exec rake db:test:clone_structure
 end
 
 function be
